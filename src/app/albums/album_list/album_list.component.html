@@ -1,1 +1,8 @@
-<h2>Album List</h2>
+<div
+  class="flex items-center flex-col md:grid md:items-start md:grid-cols-2 lg:grid-cols-3 gap-2"
+>
+  <app-album_item
+    *ngFor="let albumItem of albums"
+    [album]="albumItem"
+  ></app-album_item>
+</div>
