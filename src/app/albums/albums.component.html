@@ -1,1 +1,15 @@
 <h2>Albums</h2>
+<button
+  class="bg-blue-500 text-white rounded px-4 py-2"
+  (click)="onStoreAlbums()"
+>
+  Save Albums
+</button>
+
+<button
+  class="bg-green-500 text-white rounded px-4 py-2"
+  (click)="onFetchAlbums()"
+>
+  Fetch Albums
+</button>
+<app-album-list></app-album-list>
