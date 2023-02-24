@@ -1,0 +1,33 @@
+.title {
+  @apply text-2xl text-center text-slate-800 font-sans font-semibold;
+}
+
+form {
+  @apply mt-8;
+
+  div {
+    @apply mt-3;
+  }
+
+  label {
+    @apply text-sm py-2 uppercase font-semibold;
+  }
+
+  input,
+  textarea {
+    @apply w-full h-9 border-2 border-gray-300
+            transition-all duration-200 ease-in
+            text-sm font-sans tracking-wider mt-1
+            rounded p-3 outline-none focus:border-slate-800;
+  }
+
+  textarea {
+    @apply h-20;
+  }
+
+  .add_btn {
+    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent
+    transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
+    hover:font-bold;
+  }
+}

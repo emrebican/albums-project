@@ -11,7 +11,7 @@ export class AlbumsComponent implements OnInit {
   constructor(private store: DataStorageService) {}
 
   ngOnInit(): void {
-    this.onFetchAlbums();
+    // this.onFetchAlbums();
   }
 
   onStoreAlbums() {

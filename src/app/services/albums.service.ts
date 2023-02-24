@@ -12,11 +12,15 @@ export class AlbumsService {
 
   setAlbums(albums: Album[]) {
     this.albums = albums;
-
     this.albumsChanged.next(this.albums.slice());
   }
 
   getAlbums() {
     return this.albums.slice();
+  }
+
+  addAlbum(newAlbum: Album) {
+    this.albums.push(newAlbum);
+    this.albumsChanged.next(this.albums.slice());
   }
 }

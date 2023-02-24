@@ -10,7 +10,5 @@ export class AlbumItemComponent implements OnInit {
   @Input('album') album!: Album;
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.album);
-  }
+  ngOnInit() {}
 }

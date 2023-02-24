@@ -11,7 +11,7 @@ export class DataStorageService {
   constructor(private http: HttpClient, private albumsService: AlbumsService) {}
 
   storeAlbums() {
-    const albums: Album[] = [];
+    const albums = this.albumsService.getAlbums();
 
     return this.http.put(
       'https://ng-images-default-rtdb.firebaseio.com/albums.json',
