@@ -1,0 +1,31 @@
+.detail_card {
+  @apply flex rounded-lg overflow-hidden drop-shadow-lg;
+
+  .detail_img {
+    @apply flex-1;
+
+    img {
+      @apply w-full h-96 object-cover;
+    }
+  }
+
+  .detail_content {
+    @apply flex-1 bg-slate-800 p-10 text-gray-50;
+
+    h2 {
+      @apply text-3xl mb-6;
+    }
+
+    p {
+      @apply text-gray-300 mb-4;
+    }
+
+    ul {
+      @apply ml-6;
+
+      li {
+        @apply bg-slate-700 rounded mb-1 p-1;
+      }
+    }
+  }
+}

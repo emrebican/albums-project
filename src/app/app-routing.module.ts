@@ -3,11 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
+import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums', pathMatch: 'full' },
-  { path: 'albums', component: AlbumsComponent },
-  { path: 'album-form', component: AlbumFormComponent }
+  {
+    path: 'albums',
+    component: AlbumsComponent,
+    children: [
+      { path: ':id', component: AlbumDetailComponent },
+      { path: ':id/edit', component: AlbumFormComponent }
+    ]
+  },
+  { path: 'new-album', component: AlbumFormComponent }
 ];
 
 @NgModule({

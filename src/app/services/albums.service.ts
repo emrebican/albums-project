@@ -23,4 +23,9 @@ export class AlbumsService {
     this.albums.push(newAlbum);
     this.albumsChanged.next(this.albums.slice());
   }
+
+  // for AlbumDetail
+  getAlbum(index: number) {
+    return this.albums[index];
+  }
 }

@@ -10,6 +10,7 @@ import { AlbumListComponent } from './albums/album_list/album_list.component';
 import { AlbumItemComponent } from './albums/album_list/album_item/album_item.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
+import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AlbumFormComponent } from './albums/album_form/album_form.component';
     AlbumsComponent,
     AlbumListComponent,
     AlbumItemComponent,
-    AlbumFormComponent
+    AlbumFormComponent,
+    AlbumDetailComponent
   ],
   imports: [
     BrowserModule,

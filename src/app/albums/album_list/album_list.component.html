@@ -1,8 +1,9 @@
 <div
-  class="flex items-center flex-col md:grid md:items-start md:grid-cols-2 lg:grid-cols-3 gap-6"
+  class="flex items-center flex-col md:grid md:items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
 >
   <app-album_item
-    *ngFor="let albumItem of albums"
+    *ngFor="let albumItem of albums; let i = index"
     [album]="albumItem"
+    [index]="i"
   ></app-album_item>
 </div>
