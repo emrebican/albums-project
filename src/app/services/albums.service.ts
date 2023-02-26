@@ -6,6 +6,7 @@ import { Album } from '../albums/album.model';
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
+  editMode = new Subject<boolean>();
   private albums: Album[] = [];
 
   constructor() {}
@@ -21,6 +22,11 @@ export class AlbumsService {
 
   addAlbum(newAlbum: Album) {
     this.albums.push(newAlbum);
+    this.albumsChanged.next(this.albums.slice());
+  }
+
+  updateAlbum(index: number, updatedAlbum: Album) {
+    this.albums[index] = updatedAlbum;
     this.albumsChanged.next(this.albums.slice());
   }
 

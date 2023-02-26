@@ -27,4 +27,8 @@ export class AlbumDetailComponent implements OnInit {
       console.log(this.albumDetail);
     });
   }
+
+  onEditAlbum() {
+    this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
+  }
 }
