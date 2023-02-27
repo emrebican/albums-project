@@ -4,7 +4,7 @@ import { map, tap } from 'rxjs/operators';
 
 import { AlbumsService } from './albums.service';
 
-import { Album } from '../albums/album.model';
+import { Album } from '../../shared/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {

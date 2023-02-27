@@ -11,6 +11,7 @@ import { AlbumItemComponent } from './albums/album_list/album_item/album_item.co
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
+import { HighlightDirective } from 'src/shared/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AlbumDetailComponent } from './albums/album_detail/album_detail.compone
     AlbumListComponent,
     AlbumItemComponent,
     AlbumFormComponent,
-    AlbumDetailComponent
+    AlbumDetailComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

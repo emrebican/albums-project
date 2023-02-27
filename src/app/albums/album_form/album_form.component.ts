@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AlbumsService } from 'src/app/services/albums.service';
 import { DataStorageService } from 'src/app/services/data_storage.service';
 
-import { Album } from '../album.model';
+import { Album } from '../../../shared/album.model';
 
 @Component({
   selector: 'app-album-form',

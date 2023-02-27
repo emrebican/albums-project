@@ -10,10 +10,13 @@
     </ul>
     <button type="button" (click)="onEditAlbum()">Edit</button>
     <br />
+    <!-- add comment -->
     <div *ngIf="commentMode">
       <input type="text" class="text-slate-800 px-1" #contentInput />
       <button type="button" (click)="onAddComment()">Add</button>
     </div>
     <button (click)="onCommentMode()">+ add comment</button>
+    <br />
+    <button (click)="onDeleteAlbum()">Delete</button>
   </div>
 </div>

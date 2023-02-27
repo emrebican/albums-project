@@ -5,7 +5,7 @@ import { AlbumsService } from 'src/app/services/albums.service';
 import { DataStorageService } from 'src/app/services/data_storage.service';
 
 import { Comment } from 'src/shared/comment.model';
-import { Album } from '../album.model';
+import { Album } from '../../../shared/album.model';
 
 @Component({
   selector: 'app-album_detail',
@@ -36,6 +36,14 @@ export class AlbumDetailComponent implements OnInit {
     this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
   }
 
+  onDeleteAlbum() {
+    this.albumsService.deleteAlbum(this.id);
+    this.dataStorageService.storeAlbums().subscribe((responseData) => {
+      console.log(responseData);
+      this.router.navigate(['/albums'], { relativeTo: this.route });
+    });
+  }
+
   onAddComment() {
     this.albumDetail.comments.push(
       new Comment('Emre', this.content.nativeElement.value)
@@ -44,7 +52,6 @@ export class AlbumDetailComponent implements OnInit {
     this.dataStorageService.storeAlbums().subscribe((responseData) => {
       console.log(responseData);
       this.commentMode = false;
-      this.router.navigate(['/albums'], { relativeTo: this.route });
     });
   }
 

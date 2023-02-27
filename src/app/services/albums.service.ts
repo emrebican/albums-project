@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Album } from '../albums/album.model';
+import { Album } from '../../shared/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
-  albumSelected = new Subject<Album>();
   editMode = new Subject<boolean>();
   private albums: Album[] = [];
 
@@ -28,6 +27,11 @@ export class AlbumsService {
 
   updateAlbum(index: number, updatedAlbum: Album) {
     this.albums[index] = updatedAlbum;
+    this.albumsChanged.next(this.albums.slice());
+  }
+
+  deleteAlbum(index: number) {
+    this.albums.splice(index, 1);
     this.albumsChanged.next(this.albums.slice());
   }
 
