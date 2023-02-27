@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { AlbumsService } from 'src/services/albums.service';
@@ -16,6 +16,7 @@ export class AlbumFormComponent implements OnInit {
   id!: number;
   editMode!: boolean;
   albumForm!: FormGroup;
+  REGEX = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
 
   constructor(
     private albumsService: AlbumsService,
@@ -80,9 +81,12 @@ export class AlbumFormComponent implements OnInit {
     }
 
     this.albumForm = new FormGroup({
-      title: new FormControl(albumTitle),
-      description: new FormControl(albumDescription),
-      imageURL: new FormControl(albumImageURL),
+      title: new FormControl(albumTitle, Validators.required),
+      description: new FormControl(albumDescription, Validators.required),
+      imageURL: new FormControl(albumImageURL, [
+        Validators.required,
+        Validators.pattern(this.REGEX)
+      ]),
       comments: albumComments
     });
   }

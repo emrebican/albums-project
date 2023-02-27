@@ -30,4 +30,9 @@ form {
     transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
     hover:font-bold;
   }
+
+  .disabled_btn {
+    @apply text-gray-50 w-full bg-slate-500 rounded py-2 mt-5 border-2 border-transparent
+    transition-all duration-200 ease-in;
+  }
 }

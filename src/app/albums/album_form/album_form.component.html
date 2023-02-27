@@ -4,22 +4,49 @@
     <div>
       <label for="title">Title</label>
       <input type="text" id="title" formControlName="title" />
+      <span
+        class="text-sm text-gray-500"
+        *ngIf="
+          albumForm.get('title')?.invalid && albumForm.get('title')?.touched
+        "
+        >Type a valid "Title"</span
+      >
     </div>
     <div>
       <label for="description">Description</label>
       <textarea id="description" formControlName="description"></textarea>
+      <span
+        class="text-sm text-gray-500"
+        *ngIf="
+          albumForm.get('description')?.invalid &&
+          albumForm.get('description')?.touched
+        "
+        >Type a valid "Description"</span
+      >
     </div>
     <div>
       <label for="imageURL">Image URL</label>
       <input type="text" id="imageURL" formControlName="imageURL" #imagePath />
+      <span
+        class="text-sm text-gray-500"
+        *ngIf="
+          albumForm.get('imageURL')?.invalid &&
+          albumForm.get('imageURL')?.touched
+        "
+        >Type a valid "image URL"</span
+      >
     </div>
     <img
-      *ngIf="imagePath.value"
+      *ngIf="imagePath.value && albumForm.get('imageURL')?.valid"
       [src]="imagePath.value"
       alt=""
       class="rounded mt-4 w-full h-full"
     />
-    <button class="add_btn" type="submit">
+    <button
+      [ngClass]="{ add_btn: albumForm.valid, disabled_btn: !albumForm.valid }"
+      type="submit"
+      [disabled]="!albumForm.valid"
+    >
       {{ editMode ? ('Edit' | uppercase) : ('Add' | uppercase) }}
     </button>
   </form>
