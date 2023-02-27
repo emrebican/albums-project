@@ -6,6 +6,7 @@ import { Album } from '../albums/album.model';
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
+  albumSelected = new Subject<Album>();
   editMode = new Subject<boolean>();
   private albums: Album[] = [];
 

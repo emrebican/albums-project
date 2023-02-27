@@ -6,8 +6,14 @@
     <h2>{{ albumDetail?.title }}</h2>
     <p>{{ albumDetail?.description }}</p>
     <ul *ngFor="let item of albumDetail?.comments">
-      <li>{{ item }}</li>
+      <li>{{ item.author }}: {{ item.content }}</li>
     </ul>
-    <button (click)="onEditAlbum()">Edit</button>
+    <button type="button" (click)="onEditAlbum()">Edit</button>
+    <br />
+    <div *ngIf="commentMode">
+      <input type="text" class="text-slate-800 px-1" #contentInput />
+      <button type="button" (click)="onAddComment()">Add</button>
+    </div>
+    <button (click)="onCommentMode()">+ add comment</button>
   </div>
 </div>
