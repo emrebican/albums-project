@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { DataStorageService } from 'src/services/data_storage.service';
+import { I_CanComponentDeactivate } from 'src/shared/canDeactivate.model';
 
 import { Album } from '../../../shared/album.model';
 
@@ -12,10 +14,12 @@ import { Album } from '../../../shared/album.model';
   templateUrl: './album_form.component.html',
   styleUrls: ['./album_form.component.scss']
 })
-export class AlbumFormComponent implements OnInit {
+export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
   id!: number;
   editMode!: boolean;
   albumForm!: FormGroup;
+  changesSaved: boolean = false;
+  savedForm = new Subject<Album>();
   REGEX = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
 
   constructor(
@@ -33,6 +37,19 @@ export class AlbumFormComponent implements OnInit {
     });
   }
 
+  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+    if (
+      (this.albumForm.value.title !== '' ||
+        this.albumForm.value.description !== '' ||
+        this.albumForm.value.imageURL !== '') &&
+      !this.changesSaved
+    ) {
+      return confirm('Do you want to discard changes?');
+    } else {
+      return true;
+    }
+  }
+
   onSubmit() {
     const newAlbum = new Album(
       this.albumForm.value.title,
@@ -40,6 +57,8 @@ export class AlbumFormComponent implements OnInit {
       this.albumForm.value.imageURL,
       this.albumForm.value.comments
     );
+
+    this.changesSaved = true;
 
     if (this.editMode) {
       this.albumsService.updateAlbum(this.id, newAlbum);

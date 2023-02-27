@@ -4,7 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
+
 import { AlbumResolver } from '../services/albumsResolver.resolver';
+import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums', pathMatch: 'full' },
@@ -24,7 +26,11 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path: 'new-album', component: AlbumFormComponent }
+  {
+    path: 'new-album',
+    component: AlbumFormComponent,
+    canDeactivate: [CanDeactivateGuard]
+  }
 ];
 
 @NgModule({

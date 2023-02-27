@@ -13,8 +13,11 @@ import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
 import { LoadingSpinnerComponent } from 'src/shared/loading-spinner/loading-spinner.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { HighlightDirective } from 'src/shared/highlight.directive';
 import { DropdownDirective } from 'src/shared/dropdown.directive';
+import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
+import { GrayHighlightDirective } from 'src/shared/grayHighlight.directive';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { DropdownDirective } from 'src/shared/dropdown.directive';
     LoadingSpinnerComponent,
     NavbarComponent,
     HighlightDirective,
+    GrayHighlightDirective,
     DropdownDirective
   ],
   imports: [
@@ -36,7 +40,7 @@ import { DropdownDirective } from 'src/shared/dropdown.directive';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CanDeactivateGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

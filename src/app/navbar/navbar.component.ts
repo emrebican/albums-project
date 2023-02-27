@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  toggleMenu: boolean = false;
+  toggleOptions: boolean = false;
+  options: string[] = ['store album', 'fetch album', 'log out'];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onToggleMenu() {
+    this.toggleMenu = !this.toggleMenu;
   }
 
+  onToggleOptions() {
+    this.toggleOptions = !this.toggleOptions;
+  }
 }
