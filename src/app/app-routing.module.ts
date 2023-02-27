@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
-import { AlbumResolver } from './services/albumsResolver.resolver';
+import { AlbumResolver } from '../services/albumsResolver.resolver';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums', pathMatch: 'full' },

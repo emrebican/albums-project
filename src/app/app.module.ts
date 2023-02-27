@@ -11,6 +11,7 @@ import { AlbumItemComponent } from './albums/album_list/album_item/album_item.co
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { AlbumDetailComponent } from './albums/album_detail/album_detail.component';
+import { LoadingSpinnerComponent } from 'src/shared/loading-spinner/loading-spinner.component';
 import { HighlightDirective } from 'src/shared/highlight.directive';
 
 @NgModule({
@@ -21,6 +22,7 @@ import { HighlightDirective } from 'src/shared/highlight.directive';
     AlbumItemComponent,
     AlbumFormComponent,
     AlbumDetailComponent,
+    LoadingSpinnerComponent,
     HighlightDirective
   ],
   imports: [

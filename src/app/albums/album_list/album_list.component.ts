@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AlbumsService } from 'src/app/services/albums.service';
+import { AlbumsService } from 'src/services/albums.service';
 
 import { Album } from '../../../shared/album.model';
 

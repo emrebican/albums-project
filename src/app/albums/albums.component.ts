@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataStorageService } from '../services/data_storage.service';
+import { DataStorageService } from '../../services/data_storage.service';
 
 @Component({
   selector: 'app-albums',
@@ -7,21 +7,28 @@ import { DataStorageService } from '../services/data_storage.service';
   styleUrls: ['./albums.component.scss']
 })
 export class AlbumsComponent implements OnInit {
-  // GEÇİÇİ **************************************************** -- Header da bir düğme ile yapılacak
-  constructor(private store: DataStorageService) {}
+  isLoading: boolean = false;
+
+  constructor(private dataStorageService: DataStorageService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
+
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 800);
+
     this.onFetchAlbums();
   }
 
   onStoreAlbums() {
-    this.store.storeAlbums().subscribe((responseData) => {
+    this.dataStorageService.storeAlbums().subscribe((responseData) => {
       console.log(responseData);
     });
   }
 
   onFetchAlbums() {
-    this.store.fetchAlbums().subscribe(() => {
+    this.dataStorageService.fetchAlbums().subscribe(() => {
       console.log('Albums Fetched');
     });
   }

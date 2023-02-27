@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Album } from '../../shared/album.model';
+import { Album } from '../shared/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
-  editMode = new Subject<boolean>();
   private albums: Album[] = [];
 
   constructor() {}

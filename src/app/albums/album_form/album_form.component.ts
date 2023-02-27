@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { AlbumsService } from 'src/app/services/albums.service';
-import { DataStorageService } from 'src/app/services/data_storage.service';
+import { AlbumsService } from 'src/services/albums.service';
+import { DataStorageService } from 'src/services/data_storage.service';
 
 import { Album } from '../../../shared/album.model';
 
@@ -25,8 +25,6 @@ export class AlbumFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.albumsService.editMode.subscribe((data) => (this.editMode = data));
-
     this.route.params.subscribe((params: Params) => {
       this.id = Number(params['id']);
       this.editMode = params['id'] ? true : false;

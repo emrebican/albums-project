@@ -7,7 +7,7 @@ import {
 
 import { AlbumsService } from './albums.service';
 import { DataStorageService } from './data_storage.service';
-import { Album } from '../../shared/album.model';
+import { Album } from '../shared/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumResolver implements Resolve<Album[]> {

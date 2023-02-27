@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { AlbumsService } from 'src/app/services/albums.service';
-import { DataStorageService } from 'src/app/services/data_storage.service';
+import { AlbumsService } from 'src/services/albums.service';
+import { DataStorageService } from 'src/services/data_storage.service';
 
 import { Comment } from 'src/shared/comment.model';
 import { Album } from '../../../shared/album.model';
@@ -53,6 +53,10 @@ export class AlbumDetailComponent implements OnInit {
       console.log(responseData);
       this.commentMode = false;
     });
+  }
+
+  onCloseDetail() {
+    this.router.navigate(['/albums'], { relativeTo: this.route });
   }
 
   onCommentMode() {
