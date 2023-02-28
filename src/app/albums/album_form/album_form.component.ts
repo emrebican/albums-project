@@ -38,15 +38,30 @@ export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
   }
 
   canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
-    if (
-      (this.albumForm.value.title !== '' ||
-        this.albumForm.value.description !== '' ||
-        this.albumForm.value.imageURL !== '') &&
-      !this.changesSaved
-    ) {
-      return confirm('Do you want to discard changes?');
+    if (this.editMode) {
+      const selectedAlbum = this.albumsService.getAlbum(this.id);
+      const formValue = this.albumForm.value;
+
+      if (
+        formValue.title !== selectedAlbum.title ||
+        formValue.description !== selectedAlbum.description ||
+        formValue.imageURL !== selectedAlbum.imageURL
+      ) {
+        return confirm('Do you want to discard changes?');
+      } else {
+        return true;
+      }
     } else {
-      return true;
+      if (
+        (this.albumForm.value.title !== '' ||
+          this.albumForm.value.description !== '' ||
+          this.albumForm.value.imageURL !== '') &&
+        !this.changesSaved
+      ) {
+        return confirm('Do you want to discard changes?');
+      } else {
+        return true;
+      }
     }
   }
 

@@ -22,7 +22,8 @@ const appRoutes: Routes = [
       {
         path: ':id/edit',
         component: AlbumFormComponent,
-        resolve: [AlbumResolver]
+        resolve: [AlbumResolver],
+        canDeactivate: [CanDeactivateGuard]
       }
     ]
   },
