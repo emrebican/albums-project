@@ -15,7 +15,9 @@ const appRoutes: Routes = [
   {
     path: 'albums',
     component: AlbumsComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+
     children: [
       {
         path: ':id',
