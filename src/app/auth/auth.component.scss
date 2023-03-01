@@ -26,9 +26,9 @@ form {
   }
 
   .signup_btn {
-    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent
-      transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
-      hover:font-bold uppercase;
+    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent uppercase
+    transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
+    hover:font-bold;
   }
 
   .switch_btn {
@@ -37,6 +37,10 @@ form {
 
   .disabled_btn {
     @apply text-gray-50 w-full bg-slate-500 rounded py-2 mt-5 border-2 border-transparent
-      transition-all duration-200 ease-in;
+    uppercase transition-all duration-200 ease-in;
+  }
+
+  input.ng-invalid.ng-touched {
+    @apply border-red-400;
   }
 }

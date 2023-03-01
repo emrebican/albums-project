@@ -3,16 +3,52 @@
   <div>
     <label for="email">Email</label>
     <input type="email" id="email" formControlName="email" />
+    <span
+      class="text-sm text-gray-500"
+      *ngIf="
+        authForm.get('email')?.invalid &&
+        authForm.get('email')?.touched
+      "
+      >Type a valid "email"</span
+    >
   </div>
   <div>
     <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" />
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+    />
+    <span
+      class="text-sm text-gray-500"
+      *ngIf="
+        authForm.get('password')?.invalid &&
+        authForm.get('password')?.touched
+      "
+      >Type a valid "password"</span
+    >
   </div>
-  <button type="submit" class="signup_btn">
+  <button
+    type="submit"
+    class="signup_btn"
+    [ngClass]="{
+      signup_btn: authForm.valid,
+      disabled_btn: !authForm.valid
+    }"
+    [disabled]="!authForm.valid"
+  >
     {{ isLoginMode ? 'Login' : 'Sign up' }}
   </button>
   <br />
-  <button type="button" class="switch_btn" (click)="onSwitchMode()">
-    {{ isLoginMode ? 'Go to Sign up page!' : 'You already have an account?' }}
+  <button
+    type="button"
+    class="switch_btn"
+    (click)="onSwitchMode()"
+  >
+    {{
+      isLoginMode
+        ? 'Go to Sign up page!'
+        : 'You already have an account?'
+    }}
   </button>
 </form>

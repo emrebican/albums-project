@@ -1,7 +1,9 @@
 <nav class="bg-slate-800">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+      <div
+        class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+      >
         <!-- Mobile menu button-->
         <button
           type="button"
@@ -11,11 +13,7 @@
           (click)="onToggleMenu()"
         >
           <span class="sr-only">Open main menu</span>
-          <!--
-            Icon when menu is closed.
 
-            Menu open: "hidden", Menu closed: "block"
-          -->
           <svg
             class="block h-6 w-6"
             fill="none"
@@ -30,11 +28,7 @@
               d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
             />
           </svg>
-          <!--
-            Icon when menu is open.
 
-            Menu open: "block", Menu closed: "hidden"
-          -->
           <svg
             class="hidden h-6 w-6"
             fill="none"
@@ -69,17 +63,25 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            <a routerLink="/albums" routerLinkActive="active" class="nav_link"
+            <a
+              routerLink="/albums"
+              routerLinkActive="active"
+              class="nav_link"
               >Album</a
             >
 
             <a
+              *ngIf="isAuthenticated"
               routerLink="/new-album"
               routerLinkActive="active"
               class="nav_link"
               >Add New</a
             >
-            <a routerLink="/auth" routerLinkActive="active" class="nav_link"
+            <a
+              *ngIf="!isAuthenticated"
+              routerLink="/auth"
+              routerLinkActive="active"
+              class="nav_link"
               >Login / Sign up</a
             >
           </div>
@@ -91,7 +93,7 @@
         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
         <!-- Profile dropdown -->
-        <div class="relative ml-3">
+        <div class="relative ml-3" *ngIf="isAuthenticated">
           <img
             class="h-8 w-8 rounded-full"
             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -107,17 +109,37 @@
               tabindex="-1"
               *ngIf="toggleOptions"
             >
-              <div *ngFor="let item of options">
-                <a
-                  href="#"
-                  class="block px-4 py-2 text-sm text-gray-700"
-                  role="menuitem"
-                  tabindex="-1"
-                  id="user-menu-item-0"
-                  appGrayHighlight
-                  >{{ item | titlecase }}</a
-                >
-              </div>
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                appGrayHighlight
+                (click)="onStoreAlbums()"
+                >{{
+                  isStoring ? 'Storing...' : 'Store Album'
+                }}</a
+              >
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                appGrayHighlight
+                (click)="onFetchAlbums()"
+                >{{
+                  isFetching ? 'Fetching...' : 'Fetch Album'
+                }}</a
+              >
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                appGrayHighlight
+                (click)="onLogout()"
+                >Log Out</a
+              >
             </div>
           </div>
         </div>
@@ -136,7 +158,10 @@
         >Album</a
       >
 
-      <a routerLink="/new-album" routerLinkActive="active" class="mobile_link"
+      <a
+        routerLink="/new-album"
+        routerLinkActive="active"
+        class="mobile_link"
         >Add New</a
       >
     </div>
