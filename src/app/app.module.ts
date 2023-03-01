@@ -26,6 +26,7 @@ import { DropdownDirective } from 'src/shared/dropdown.directive';
 import { GrayHighlightDirective } from 'src/shared/grayHighlight.directive';
 import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
 import { AuthInterceptorService } from 'src/services/authentication/auth-interceptor.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AuthInterceptorService } from 'src/services/authentication/auth-interce
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     CanDeactivateGuard,
