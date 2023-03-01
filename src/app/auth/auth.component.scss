@@ -1,0 +1,46 @@
+form {
+  @apply mt-8 w-full px-20 sm:px-0 sm:w-1/2 mx-auto;
+
+  h2 {
+    @apply text-center text-lg font-medium;
+  }
+
+  div {
+    @apply mt-3;
+  }
+
+  label {
+    @apply text-sm py-2 uppercase font-semibold;
+  }
+
+  input,
+  textarea {
+    @apply w-full h-9 border-2 border-gray-300
+              transition-all duration-200 ease-in
+              text-sm font-sans tracking-wider mt-1
+              rounded p-3 outline-none focus:border-slate-800;
+  }
+
+  textarea {
+    @apply h-20;
+  }
+
+  .signup_btn {
+    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent uppercase
+    transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
+    hover:font-bold;
+  }
+
+  .switch_btn {
+    @apply w-full text-center mt-2;
+  }
+
+  .disabled_btn {
+    @apply text-gray-50 w-full bg-slate-500 rounded py-2 mt-5 border-2 border-transparent
+    uppercase transition-all duration-200 ease-in;
+  }
+
+  input.ng-invalid.ng-touched {
+    @apply border-red-400;
+  }
+}

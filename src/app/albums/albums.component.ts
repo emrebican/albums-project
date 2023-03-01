@@ -21,12 +21,6 @@ export class AlbumsComponent implements OnInit {
     this.onFetchAlbums();
   }
 
-  onStoreAlbums() {
-    this.dataStorageService.storeAlbums().subscribe((responseData) => {
-      console.log(responseData);
-    });
-  }
-
   onFetchAlbums() {
     this.dataStorageService.fetchAlbums().subscribe(() => {
       console.log('Albums Fetched');

@@ -1,18 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { AuthenticationService } from 'src/services/authentication/auth.service';
+import { DataStorageService } from 'src/services/data_storage.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
-  toggleMenu: boolean = false;
-  toggleOptions: boolean = false;
-  options: string[] = ['store album', 'fetch album', 'log out'];
+export class NavbarComponent implements OnInit, OnDestroy {
+  toggleMenu = false;
+  toggleOptions = false;
+  isAuthenticated = false;
+  isStoring = false;
+  isFetching = false;
+  private authSub!: Subscription;
 
-  constructor() {}
+  constructor(
+    private authService: AuthenticationService,
+    private dataStorageService: DataStorageService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authSub = this.authService.user.subscribe(
+      (userData) => {
+        this.isAuthenticated = userData ? true : false;
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.authSub.unsubscribe();
+  }
 
   onToggleMenu() {
     this.toggleMenu = !this.toggleMenu;
@@ -20,5 +39,30 @@ export class NavbarComponent implements OnInit {
 
   onToggleOptions() {
     this.toggleOptions = !this.toggleOptions;
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.toggleOptions = false;
+  }
+
+  onStoreAlbums() {
+    this.isStoring = true;
+
+    this.dataStorageService
+      .storeAlbums()
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.isStoring = false;
+      });
+  }
+
+  onFetchAlbums() {
+    this.isFetching = true;
+
+    this.dataStorageService.fetchAlbums().subscribe(() => {
+      console.log('Albums Fetched');
+      this.isFetching = false;
+    });
   }
 }
