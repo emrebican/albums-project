@@ -8,7 +8,10 @@ import { Album } from '../shared/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  constructor(private http: HttpClient, private albumsService: AlbumsService) {}
+  constructor(
+    private http: HttpClient,
+    private albumsService: AlbumsService
+  ) {}
 
   storeAlbums() {
     const albums = this.albumsService.getAlbums();
@@ -21,13 +24,21 @@ export class DataStorageService {
 
   fetchAlbums() {
     return this.http
-      .get<Album[]>('https://ng-images-default-rtdb.firebaseio.com/albums.json')
+      .get<Album[]>(
+        'https://ng-images-default-rtdb.firebaseio.com/albums.json'
+      )
       .pipe(
         map((albums) => {
           return albums.map((album) => {
             return {
               ...album,
-              comments: album.comments ? album.comments : []
+              comments: album.comments ? album.comments : [],
+              reactions: album.reactions
+                ? album.reactions
+                : {
+                    users: [],
+                    reacts: { thumb: 0, like: 0, comment: 0 }
+                  }
             };
           });
         }),

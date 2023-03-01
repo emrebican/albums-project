@@ -1,4 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { AlbumsService } from 'src/services/albums.service';
@@ -28,20 +33,28 @@ export class AlbumDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = Number(params['id']);
-      this.albumDetail = this.albumsService.getAlbum(+params['id']);
+      this.albumDetail = this.albumsService.getAlbum(
+        +params['id']
+      );
     });
   }
 
   onEditAlbum() {
-    this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
+    this.router.navigate(['../', this.id, 'edit'], {
+      relativeTo: this.route
+    });
   }
 
   onDeleteAlbum() {
     this.albumsService.deleteAlbum(this.id);
-    this.dataStorageService.storeAlbums().subscribe((responseData) => {
-      console.log(responseData);
-      this.router.navigate(['/albums'], { relativeTo: this.route });
-    });
+    this.dataStorageService
+      .storeAlbums()
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.router.navigate(['/albums'], {
+          relativeTo: this.route
+        });
+      });
   }
 
   onAddComment() {
@@ -49,14 +62,17 @@ export class AlbumDetailComponent implements OnInit {
       new Comment('Emre', this.content.nativeElement.value)
     );
 
-    this.dataStorageService.storeAlbums().subscribe((responseData) => {
-      console.log(responseData);
-      this.commentMode = false;
-    });
+    this.dataStorageService
+      .storeAlbums()
+      .subscribe((responseData) => {
+        this.commentMode = false;
+      });
   }
 
   onCloseDetail() {
-    this.router.navigate(['/albums'], { relativeTo: this.route });
+    this.router.navigate(['/albums'], {
+      relativeTo: this.route
+    });
   }
 
   onCommentMode() {

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormArray,
+  Validators
+} from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 
@@ -14,7 +19,9 @@ import { Album } from '../../../shared/album.model';
   templateUrl: './album_form.component.html',
   styleUrls: ['./album_form.component.scss']
 })
-export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
+export class AlbumFormComponent
+  implements OnInit, I_CanComponentDeactivate
+{
   id!: number;
   editMode!: boolean;
   albumForm!: FormGroup;
@@ -37,7 +44,10 @@ export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
     });
   }
 
-  canDeactivate(): boolean | Observable<boolean> | Promise<boolean> {
+  canDeactivate():
+    | boolean
+    | Observable<boolean>
+    | Promise<boolean> {
     if (this.editMode) {
       const selectedAlbum = this.albumsService.getAlbum(this.id);
       const formValue = this.albumForm.value;
@@ -70,7 +80,8 @@ export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
       this.albumForm.value.title,
       this.albumForm.value.description,
       this.albumForm.value.imageURL,
-      this.albumForm.value.comments
+      this.albumForm.value.comments,
+      this.albumForm.value.reactions
     );
 
     this.changesSaved = true;
@@ -81,11 +92,17 @@ export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
       this.albumsService.addAlbum(newAlbum);
     }
 
+    console.log(this.albumForm);
+
     // fetch albums for every add new Album
-    this.dataStorageService.storeAlbums().subscribe((responseData) => {
-      console.log(responseData);
-      this.router.navigate(['/albums'], { relativeTo: this.route });
-    });
+    this.dataStorageService
+      .storeAlbums()
+      .subscribe((responseData) => {
+        console.log(responseData);
+        this.router.navigate(['/albums'], {
+          relativeTo: this.route
+        });
+      });
   }
 
   // Init FORM
@@ -116,7 +133,10 @@ export class AlbumFormComponent implements OnInit, I_CanComponentDeactivate {
 
     this.albumForm = new FormGroup({
       title: new FormControl(albumTitle, Validators.required),
-      description: new FormControl(albumDescription, Validators.required),
+      description: new FormControl(
+        albumDescription,
+        Validators.required
+      ),
       imageURL: new FormControl(albumImageURL, [
         Validators.required,
         Validators.pattern(this.REGEX)

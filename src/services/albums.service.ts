@@ -13,6 +13,7 @@ export class AlbumsService {
   setAlbums(albums: Album[]) {
     this.albums = albums;
     this.albumsChanged.next(this.albums.slice());
+    console.log(this.albums);
   }
 
   getAlbums() {

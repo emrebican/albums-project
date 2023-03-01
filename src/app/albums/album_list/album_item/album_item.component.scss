@@ -1,5 +1,10 @@
 .item_icon {
   @apply inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50
     inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50
-    inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50;
+    inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50 active:scale-125
+    ease-in-out duration-75 transition-all;
+}
+
+.item_badge {
+  @apply inline-block whitespace-nowrap rounded-full bg-red-400 px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-neutral-50 dark:bg-red-400 absolute top-5 right-0 ring-2 ring-gray-50;
 }
