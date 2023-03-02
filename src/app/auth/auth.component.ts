@@ -1,6 +1,7 @@
 import {
   Component,
   ComponentFactoryResolver,
+  OnDestroy,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -23,7 +24,9 @@ import { I_AuthResponseData } from 'src/shared/models/auth.model';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent
+  implements OnInit, OnDestroy
+{
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost!: PlaceholderDirective;
   private CLOSE_SUB!: Subscription;
@@ -51,6 +54,12 @@ export class AuthenticationComponent implements OnInit {
         Validators.minLength(7)
       ])
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.CLOSE_SUB) {
+      this.CLOSE_SUB.unsubscribe();
+    }
   }
 
   onSubmit() {

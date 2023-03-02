@@ -66,11 +66,17 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
   }
 
   onDeleteAlbum() {
-    this.albumsService.deleteAlbum(this.index);
-    this.onStore();
-    this.router.navigate(['/albums'], {
-      relativeTo: this.route
-    });
+    if (this.currentUser) {
+      this.albumsService.deleteAlbum(this.index);
+      this.onStore();
+      this.router.navigate(['/albums'], {
+        relativeTo: this.route
+      });
+    } else {
+      this.router.navigate(['/auth'], {
+        relativeTo: this.route
+      });
+    }
   }
 
   onEditAlbum() {
@@ -80,15 +86,25 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
   }
 
   addThumb(index: number) {
-    this.addIconCount(index, 'thumb');
-
-    this.onStore();
+    if (this.currentUser) {
+      this.addIconCount(index, 'thumb');
+      this.onStore();
+    } else {
+      this.router.navigate(['/auth'], {
+        relativeTo: this.route
+      });
+    }
   }
 
   addLike(index: number) {
-    this.addIconCount(index, 'like');
-
-    this.onStore();
+    if (this.currentUser) {
+      this.addIconCount(index, 'like');
+      this.onStore();
+    } else {
+      this.router.navigate(['/auth'], {
+        relativeTo: this.route
+      });
+    }
   }
 
   private addIconCount(index: number, type: string) {
