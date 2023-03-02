@@ -5,7 +5,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { I_CanComponentDeactivate } from 'src/shared/canDeactivate.model';
+import { I_CanComponentDeactivate } from 'src/shared/models/canDeactivate.model';
 
 export class CanDeactivateGuard
   implements CanDeactivate<I_CanComponentDeactivate>

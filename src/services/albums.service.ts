@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { Album } from '../shared/album.model';
+import { Album } from '../shared/models/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {

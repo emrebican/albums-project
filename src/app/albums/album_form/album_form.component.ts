@@ -10,9 +10,9 @@ import { Observable, Subject } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { DataStorageService } from 'src/services/data_storage.service';
-import { I_CanComponentDeactivate } from 'src/shared/canDeactivate.model';
+import { I_CanComponentDeactivate } from 'src/shared/models/canDeactivate.model';
 
-import { Album } from '../../../shared/album.model';
+import { Album } from '../../../shared/models/album.model';
 
 @Component({
   selector: 'app-album-form',

@@ -21,9 +21,9 @@ import { LoadingSpinnerComponent } from 'src/shared/loading-spinner/loading-spin
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthenticationComponent } from './auth/auth.component';
 
-import { HighlightDirective } from 'src/shared/highlight.directive';
-import { DropdownDirective } from 'src/shared/dropdown.directive';
-import { GrayHighlightDirective } from 'src/shared/grayHighlight.directive';
+import { HighlightDirective } from 'src/shared/directives/highlight.directive';
+import { DropdownDirective } from 'src/shared/directives/dropdown.directive';
+import { GrayHighlightDirective } from 'src/shared/directives/grayHighlight.directive';
 import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
 import { AuthInterceptorService } from 'src/services/authentication/auth-interceptor.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';

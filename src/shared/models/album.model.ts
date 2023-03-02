@@ -1,5 +1,5 @@
-import { Comment } from 'src/shared/comment.model';
-import { Reaction } from './reaction.model';
+import { Comment } from 'src/shared/models/comment.model';
+import { Reaction } from '../models/reaction.model';
 
 export class Album {
   public title: string;

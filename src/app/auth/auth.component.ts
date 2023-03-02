@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthenticationService } from 'src/services/authentication/auth.service';
-import { I_AuthResponseData } from 'src/shared/auth.model';
+import { I_AuthResponseData } from 'src/shared/models/auth.model';
 
 @Component({
   selector: 'app-authentication',

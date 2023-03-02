@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { Album } from '../../../../shared/album.model';
+import { Album } from '../../../../shared/models/album.model';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';

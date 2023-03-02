@@ -13,8 +13,8 @@ import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
 
-import { Comment } from 'src/shared/comment.model';
-import { Album } from '../../../shared/album.model';
+import { Comment } from 'src/shared/models/comment.model';
+import { Album } from '../../../shared/models/album.model';
 
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';

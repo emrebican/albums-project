@@ -12,8 +12,8 @@ import {
 } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { I_AuthResponseData } from 'src/shared/auth.model';
-import { User } from 'src/shared/user.model';
+import { I_AuthResponseData } from 'src/shared/models/auth.model';
+import { User } from 'src/shared/models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {

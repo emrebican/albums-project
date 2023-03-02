@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 
-import { Album } from '../../../shared/album.model';
+import { Album } from '../../../shared/models/album.model';
 
 @Component({
   selector: 'app-album-list',

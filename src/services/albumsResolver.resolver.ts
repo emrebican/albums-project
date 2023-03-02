@@ -7,7 +7,7 @@ import {
 
 import { AlbumsService } from './albums.service';
 import { DataStorageService } from './data_storage.service';
-import { Album } from '../shared/album.model';
+import { Album } from '../shared/models/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumResolver implements Resolve<Album[]> {
@@ -16,7 +16,10 @@ export class AlbumResolver implements Resolve<Album[]> {
     private albumsService: AlbumsService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) {
     const albums = this.albumsService.getAlbums();
 
     if (albums.length === 0) {
