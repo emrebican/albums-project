@@ -10,7 +10,11 @@
   }
 
   .detail_content {
-    @apply flex-1 bg-slate-800 p-10 text-gray-50;
+    @apply flex-1 bg-slate-800 p-10 text-gray-50 relative;
+
+    .btn_cancel {
+      @apply absolute top-6 right-6 text-xl;
+    }
 
     h2 {
       @apply text-3xl mb-6;
@@ -24,7 +28,23 @@
       @apply ml-6;
 
       li {
-        @apply bg-slate-700 rounded mb-1 p-1;
+        @apply flex justify-between bg-slate-700 rounded mb-1 p-1 px-2;
+      }
+    }
+
+    .op_buttons {
+      @apply flex gap-4 absolute left-10 bottom-6;
+
+      button {
+        @apply p-2 px-4 rounded-sm border-2 hover:bg-transparent
+        transition-all ease-in-out;
+      }
+
+      .btn_edit {
+        @apply bg-green-600 border-green-600;
+      }
+      .btn_delete {
+        @apply bg-red-500 border-red-500;
       }
     }
   }

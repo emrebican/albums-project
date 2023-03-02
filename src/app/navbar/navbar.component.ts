@@ -14,7 +14,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   isStoring = false;
   isFetching = false;
-  private authSub!: Subscription;
+  user = '';
+  private AUTH_SUB!: Subscription;
 
   constructor(
     private authService: AuthenticationService,
@@ -22,15 +23,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.authSub = this.authService.user.subscribe(
+    this.AUTH_SUB = this.authService.user.subscribe(
       (userData) => {
         this.isAuthenticated = userData ? true : false;
+        this.user = userData.email;
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.authSub.unsubscribe();
+    this.AUTH_SUB.unsubscribe();
   }
 
   onToggleMenu() {

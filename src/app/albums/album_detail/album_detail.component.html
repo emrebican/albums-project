@@ -1,24 +1,66 @@
 <div class="detail_card">
   <div class="detail_img">
-    <img src="{{ albumDetail?.imageURL }}" alt="{{ albumDetail?.title }}" />
+    <img
+      src="{{ albumDetail?.imageURL }}"
+      alt="{{ albumDetail?.title }}"
+    />
   </div>
   <div class="detail_content">
-    <button (click)="onCloseDetail()">Close</button>
+    <button class="btn_cancel" (click)="onCloseDetail()">
+      <fa-icon [icon]="faCancel"></fa-icon>
+    </button>
 
-    <h2>{{ albumDetail?.title }}</h2>
-    <p>{{ albumDetail?.description }}</p>
-    <ul *ngFor="let item of albumDetail?.comments">
-      <li>{{ item.author }}: {{ item.content }}</li>
-    </ul>
-    <button type="button" (click)="onEditAlbum()">Edit</button>
-    <br />
-    <!-- add comment -->
-    <div *ngIf="commentMode">
-      <input type="text" class="text-slate-800 px-1" #contentInput />
-      <button type="button" (click)="onAddComment()">Add</button>
+    <div>
+      <h2>{{ albumDetail?.title }}</h2>
+      <p>{{ albumDetail?.description }}</p>
     </div>
-    <button (click)="onCommentMode()">+ add comment</button>
-    <br />
-    <button (click)="onDeleteAlbum()">Delete</button>
+
+    <ul
+      *ngFor="let item of albumDetail?.comments; let i = index"
+    >
+      <li>
+        {{ item.author }}: {{ item.content }}
+        <button (click)="onDeleteComment(i)">
+          <fa-icon [icon]="faDeleteComment"></fa-icon>
+        </button>
+      </li>
+    </ul>
+
+    <!-- add comment -->
+    <div class="flex gap-2 ml-6 mt-6" *ngIf="commentMode">
+      <input
+        type="text"
+        class="text-slate-800 px-1 w-full"
+        #contentInput
+      />
+      <button
+        type="button"
+        class="text-xl"
+        (click)="onAddComment()"
+      >
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+    </div>
+    <button *ngIf="isCommentable" (click)="onCommentMode()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      add comment
+    </button>
+
+    <div class="op_buttons">
+      <button
+        type="button"
+        class="btn_edit"
+        (click)="onEditAlbum()"
+      >
+        Edit <fa-icon [icon]="faEdit"></fa-icon>
+      </button>
+      <button
+        type="button"
+        class="btn_delete"
+        (click)="onDeleteAlbum()"
+      >
+        Delete <fa-icon [icon]="faDelete"></fa-icon>
+      </button>
+    </div>
   </div>
 </div>
