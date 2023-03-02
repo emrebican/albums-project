@@ -4,16 +4,19 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { Album } from '../../../../shared/models/album.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
+import { Album } from '../../../../shared/models/album.model';
 
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { Subscription } from 'rxjs';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-album_item',
@@ -31,8 +34,12 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
   faThumbsUp = faThumbsUp;
   faHeart = faHeart;
   faComment = faComment;
+  faDelete = faTrash;
+  faEdit = faEdit;
 
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private albumsService: AlbumsService,
     private authService: AuthenticationService,
     private dataStorageService: DataStorageService
@@ -56,6 +63,32 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
       .subscribe((resData) => {
         console.log(resData);
       });
+  }
+
+  onDeleteAlbum() {
+    this.albumsService.deleteAlbum(this.index);
+    this.onStore();
+    this.router.navigate(['/albums'], {
+      relativeTo: this.route
+    });
+  }
+
+  onEditAlbum() {
+    this.router.navigate([this.index, 'edit'], {
+      relativeTo: this.route
+    });
+  }
+
+  addThumb(index: number) {
+    this.addIconCount(index, 'thumb');
+
+    this.onStore();
+  }
+
+  addLike(index: number) {
+    this.addIconCount(index, 'like');
+
+    this.onStore();
   }
 
   private addIconCount(index: number, type: string) {
@@ -106,17 +139,5 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
         ? this.selectedAlbum.reactions.reacts.thumb++
         : this.selectedAlbum.reactions.reacts.like++;
     }
-  }
-
-  addThumb(index: number) {
-    this.addIconCount(index, 'thumb');
-
-    this.onStore();
-  }
-
-  addLike(index: number) {
-    this.addIconCount(index, 'like');
-
-    this.onStore();
   }
 }

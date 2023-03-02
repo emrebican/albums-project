@@ -1,6 +1,21 @@
-<div appHighlight class="max-w-sm rounded overflow-hidden bg-gray-100">
+<div
+  appHighlight
+  class="max-w-sm rounded overflow-hidden bg-gray-100 group relative"
+>
+  <div class="op_buttons">
+    <button type="button" (click)="onEditAlbum()">
+      <fa-icon [icon]="faEdit"></fa-icon>
+    </button>
+    <button type="button" (click)="onDeleteAlbum()">
+      <fa-icon [icon]="faDelete"></fa-icon>
+    </button>
+  </div>
   <a [routerLink]="[index]">
-    <img class="w-96 h-80 object-cover" src="{{ album.imageURL }}" alt="{{ album.title }}" />
+    <img
+      class="w-96 h-80 object-cover"
+      src="{{ album.imageURL }}"
+      alt="{{ album.title }}"
+    />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ album.title }}</div>
       <p class="text-gray-700 text-base">
@@ -9,22 +24,28 @@
     </div>
   </a>
   <div class="px-6 pt-4 pb-2 text-center">
-    <span class="item_icon cursor-pointer relative" (click)="addThumb(index)">
+    <span
+      class="item_icon cursor-pointer relative"
+      (click)="addThumb(index)"
+    >
       <fa-icon [icon]="faThumbsUp"></fa-icon>
       <span class="item_badge">
-        {{album?.reactions?.reacts?.thumb}}
+        {{ album?.reactions?.reacts?.thumb }}
       </span>
     </span>
-    <span class="item_icon cursor-pointer relative" (click)="addLike(index)">
+    <span
+      class="item_icon cursor-pointer relative"
+      (click)="addLike(index)"
+    >
       <fa-icon [icon]="faHeart"></fa-icon>
       <span class="item_badge">
-        {{album?.reactions?.reacts?.like}}
+        {{ album?.reactions?.reacts?.like }}
       </span>
     </span>
     <span class="item_icon cursor-pointer relative">
       <fa-icon [icon]="faComment"></fa-icon>
       <span class="item_badge">
-        {{album.comments.length}}
+        {{ album.comments.length }}
       </span>
     </span>
   </div>

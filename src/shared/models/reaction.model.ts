@@ -1,7 +1,6 @@
 export interface I_React {
   thumb: number;
   like: number;
-  comment: number;
 }
 
 export class Reaction {

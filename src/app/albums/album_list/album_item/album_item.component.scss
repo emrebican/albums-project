@@ -8,3 +8,15 @@
 .item_badge {
   @apply inline-block whitespace-nowrap rounded-full bg-red-400 px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none text-neutral-50 dark:bg-red-400 absolute top-5 right-0 ring-2 ring-gray-50;
 }
+
+.op_buttons {
+  @apply absolute top-6 right-6 hidden group-hover:block;
+
+  button {
+    @apply text-gray-50 bg-slate-800 h-6 w-6 rounded-full hover:scale-125 opacity-75 hover:opacity-100;
+  }
+
+  button:nth-child(1) {
+    @apply mr-2;
+  }
+}

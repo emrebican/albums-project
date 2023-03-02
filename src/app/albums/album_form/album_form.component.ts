@@ -6,7 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { DataStorageService } from 'src/services/data_storage.service';
@@ -26,7 +26,6 @@ export class AlbumFormComponent
   editMode!: boolean;
   albumForm!: FormGroup;
   changesSaved: boolean = false;
-  savedForm = new Subject<Album>();
   REGEX = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
 
   constructor(
@@ -76,12 +75,16 @@ export class AlbumFormComponent
   }
 
   onSubmit() {
+    const edittedAlbum: Album = this.albumsService.getAlbum(
+      this.id
+    );
+
     const newAlbum = new Album(
       this.albumForm.value.title,
       this.albumForm.value.description,
       this.albumForm.value.imageURL,
       this.albumForm.value.comments,
-      this.albumForm.value.reactions
+      edittedAlbum?.reactions
     );
 
     this.changesSaved = true;
@@ -111,6 +114,7 @@ export class AlbumFormComponent
     let albumDescription = '';
     let albumImageURL = '';
     let albumComments = new FormArray([]);
+    let albumReactions = new FormGroup({});
 
     if (this.editMode) {
       const album = this.albumsService.getAlbum(this.id);
@@ -141,7 +145,8 @@ export class AlbumFormComponent
         Validators.required,
         Validators.pattern(this.REGEX)
       ]),
-      comments: albumComments
+      comments: albumComments,
+      reactions: albumReactions
     });
   }
 }

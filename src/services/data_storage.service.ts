@@ -37,7 +37,7 @@ export class DataStorageService {
                 ? album.reactions
                 : {
                     users: [],
-                    reacts: { thumb: 0, like: 0, comment: 0 }
+                    reacts: { thumb: 0, like: 0 }
                   }
             };
           });
