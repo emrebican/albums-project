@@ -31,6 +31,7 @@ import { PlaceholderDirective } from 'src/shared/directives/placeholder.directiv
 
 import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
 import { AuthInterceptorService } from 'src/services/authentication/auth-interceptor.service';
+import { NotFoundComponent } from './not_found/not_found.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AuthInterceptorService } from 'src/services/authentication/auth-interce
     NavbarComponent,
     AuthenticationComponent,
     AlertComponent,
+    NotFoundComponent,
     HighlightDirective,
     GrayHighlightDirective,
     DropdownDirective,

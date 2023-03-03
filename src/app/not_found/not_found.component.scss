@@ -1,0 +1,15 @@
+div {
+  @apply w-full h-60 flex flex-col gap-8 items-center justify-center;
+
+  h2 {
+    @apply text-slate-800 text-3xl font-semibold;
+
+    span {
+      @apply text-4xl font-thin text-slate-400;
+    }
+  }
+
+  a {
+    @apply border border-blue-600 text-blue-600 p-2 rounded-sm hover:font-semibold hover:bg-blue-600 hover:text-gray-50 transition-all ease-in-out;
+  }
+}
