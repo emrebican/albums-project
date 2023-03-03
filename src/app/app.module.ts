@@ -9,6 +9,7 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core.module';
+import { SharedModule } from 'src/shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { AlbumsComponent } from './albums/albums.component';
@@ -37,15 +38,9 @@ import { NotFoundComponent } from './not_found/not_found.component';
     AlbumItemComponent,
     AlbumFormComponent,
     AlbumDetailComponent,
-    LoadingSpinnerComponent,
     NavbarComponent,
     AuthenticationComponent,
-    AlertComponent,
-    NotFoundComponent,
-    HighlightDirective,
-    GrayHighlightDirective,
-    DropdownDirective,
-    PlaceholderDirective
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +49,8 @@ import { NotFoundComponent } from './not_found/not_found.component';
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
