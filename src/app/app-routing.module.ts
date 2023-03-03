@@ -21,7 +21,11 @@ const appRoutes: Routes = [
     component: AlbumFormComponent,
     canDeactivate: [CanDeactivateGuard]
   },
-  { path: 'auth', component: AuthenticationComponent },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./auth/auth.module').then((m) => m.AuthModule)
+  },
   { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
   {
     path: 'not-found',
