@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {
-  HttpClientModule,
-  HTTP_INTERCEPTORS
-} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   ReactiveFormsModule,
@@ -11,6 +8,7 @@ import {
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core.module';
 
 import { AppComponent } from './app.component';
 import { AlbumsComponent } from './albums/albums.component';
@@ -29,8 +27,6 @@ import { DropdownDirective } from 'src/shared/directives/dropdown.directive';
 import { GrayHighlightDirective } from 'src/shared/directives/grayHighlight.directive';
 import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
 
-import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
-import { AuthInterceptorService } from 'src/services/authentication/auth-interceptor.service';
 import { NotFoundComponent } from './not_found/not_found.component';
 
 @NgModule({
@@ -57,16 +53,10 @@ import { NotFoundComponent } from './not_found/not_found.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CoreModule
   ],
-  providers: [
-    CanDeactivateGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
