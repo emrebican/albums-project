@@ -33,11 +33,6 @@ import { NotFoundComponent } from './not_found/not_found.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AlbumsComponent,
-    AlbumListComponent,
-    AlbumItemComponent,
-    AlbumFormComponent,
-    AlbumDetailComponent,
     NavbarComponent,
     AuthenticationComponent,
     NotFoundComponent
@@ -48,7 +43,6 @@ import { NotFoundComponent } from './not_found/not_found.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule,
     CoreModule,
     SharedModule
   ],

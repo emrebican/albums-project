@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AlertComponent } from './alert/alert.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
@@ -20,6 +21,7 @@ import { HighlightDirective } from './directives/highlight.directive';
   imports: [CommonModule],
   exports: [
     CommonModule,
+    FontAwesomeModule,
     AlertComponent,
     LoadingSpinnerComponent,
     PlaceholderDirective,
