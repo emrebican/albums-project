@@ -1,0 +1,12 @@
+.app_container {
+  @apply container mx-auto mt-10;
+
+  min-height: calc(100vh - 158px);
+}
+.footer_text {
+  @apply text-center text-sm text-gray-500 py-2;
+
+  span {
+    @apply text-slate-800;
+  }
+}
