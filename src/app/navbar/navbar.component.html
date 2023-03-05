@@ -164,12 +164,19 @@
         class="mobile_link"
         >Album</a
       >
-
       <a
+        *ngIf="isAuthenticated"
         routerLink="/new-album"
         routerLinkActive="active"
         class="mobile_link"
         >Add New</a
+      >
+      <a
+        *ngIf="!isAuthenticated"
+        routerLink="/auth"
+        routerLinkActive="active"
+        class="mobile_link"
+        >Login / Sign up</a
       >
     </div>
   </div>

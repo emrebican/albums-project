@@ -24,6 +24,7 @@
     </div>
   </a>
   <div class="px-6 pt-4 pb-2 text-center">
+    <!-- thumb -->
     <span
       class="item_icon cursor-pointer relative"
       (click)="addThumb(index)"
@@ -32,7 +33,21 @@
       <span class="item_badge">
         {{ album?.reactions?.reacts?.thumb }}
       </span>
+      <ng-template
+        *ngIf="
+          album?.reactions?.reacts?.thumb === 0;
+          else showThumb
+        "
+      ></ng-template>
+      <ng-template #showThumb>
+        <ul class="tooltip_list">
+          <li *ngFor="let item of album.reactions.users">
+            {{ item | username : 'thumb' }}
+          </li>
+        </ul>
+      </ng-template>
     </span>
+    <!-- like -->
     <span
       class="item_icon cursor-pointer relative"
       (click)="addLike(index)"
@@ -41,12 +56,36 @@
       <span class="item_badge">
         {{ album?.reactions?.reacts?.like }}
       </span>
+      <ng-template
+        *ngIf="
+          album?.reactions?.reacts?.like === 0;
+          else showLike
+        "
+      ></ng-template>
+      <ng-template #showLike>
+        <ul class="tooltip_list">
+          <li *ngFor="let item of album.reactions.users">
+            {{ item | username : 'like' }}
+          </li>
+        </ul>
+      </ng-template>
     </span>
+    <!-- comment -->
     <span class="item_icon cursor-pointer relative">
       <fa-icon [icon]="faComment"></fa-icon>
       <span class="item_badge">
         {{ album.comments.length }}
       </span>
+      <ng-template
+        *ngIf="album.comments.length === 0; else showComments"
+      ></ng-template>
+      <ng-template #showComments>
+        <ul class="tooltip_list">
+          <li *ngFor="let item of album.comments">
+            {{ item.author | username : '@' }}
+          </li>
+        </ul>
+      </ng-template>
     </span>
   </div>
 </div>

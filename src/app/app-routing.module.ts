@@ -5,7 +5,6 @@ import { CanDeactivateGuard } from 'src/services/can-deactivate.guard';
 
 import { AlbumFormComponent } from './albums/album_form/album_form.component';
 import { NotFoundComponent } from './not_found/not_found.component';
-import { AuthenticationComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/albums', pathMatch: 'full' },

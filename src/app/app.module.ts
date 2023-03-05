@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   FormsModule
 } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core.module';
 import { SharedModule } from 'src/shared/shared.module';

@@ -8,6 +8,7 @@ import { PlaceholderDirective } from './directives/placeholder.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { GrayHighlightDirective } from './directives/grayHighlight.directive';
 import { HighlightDirective } from './directives/highlight.directive';
+import { UserNamePipe } from './pipes/userName.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     PlaceholderDirective,
     DropdownDirective,
     GrayHighlightDirective,
-    HighlightDirective
+    HighlightDirective,
+    UserNamePipe
   ],
   imports: [CommonModule],
   exports: [
@@ -27,7 +29,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     PlaceholderDirective,
     DropdownDirective,
     GrayHighlightDirective,
-    HighlightDirective
+    HighlightDirective,
+    UserNamePipe
   ],
   entryComponents: [AlertComponent]
 })

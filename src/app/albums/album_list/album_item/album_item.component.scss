@@ -3,6 +3,16 @@
     inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50
     inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-slate-800 hover:text-gray-50 active:scale-125
     ease-in-out duration-75 transition-all;
+
+  .tooltip_list {
+    @apply bg-slate-700 text-gray-50 rounded p-1 absolute hidden flex flex-col items-center justify-center;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+  }
+}
+.item_icon:hover .tooltip_list {
+  display: block;
 }
 
 .item_badge {
