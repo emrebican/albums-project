@@ -1,5 +1,6 @@
 import {
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpParams,
   HttpRequest
@@ -25,7 +26,10 @@ export class AuthInterceptorService implements HttpInterceptor {
 
         // if we have a user
         const modifiedReq = req.clone({
-          params: new HttpParams().set('auth', user.token)
+          params: new HttpParams().set('auth', user.token),
+          headers: new HttpHeaders({
+            Authentication: 'Approved'
+          })
         });
         return next.handle(modifiedReq);
       })

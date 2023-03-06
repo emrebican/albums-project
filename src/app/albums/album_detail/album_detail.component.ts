@@ -88,7 +88,8 @@ export class AlbumDetailComponent
 
   onEditAlbum() {
     this.router.navigate(['../', this.id, 'edit'], {
-      relativeTo: this.route
+      relativeTo: this.route,
+      fragment: `Editing_${this.id}`
     });
   }
 

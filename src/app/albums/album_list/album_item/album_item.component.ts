@@ -81,7 +81,8 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
 
   onEditAlbum() {
     this.router.navigate([this.index, 'edit'], {
-      relativeTo: this.route
+      relativeTo: this.route,
+      fragment: `Editing_${this.index}`
     });
   }
 

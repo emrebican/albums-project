@@ -5,7 +5,7 @@
     ease-in-out duration-75 transition-all;
 
   .tooltip_list {
-    @apply bg-slate-700 text-gray-50 rounded p-1 absolute hidden flex flex-col items-center justify-center;
+    @apply bg-slate-700 text-gray-50 rounded p-1 w-fit absolute hidden flex flex-col items-center justify-center;
     bottom: 30px;
     left: 0;
     right: 0;

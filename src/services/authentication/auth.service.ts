@@ -28,7 +28,7 @@ export class AuthenticationService {
   onSignUp(email: string, password: string) {
     return this.http
       .post<I_AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.API_KEY}`,
+        `${environment.SIGNUP_URL}${environment.API_KEY}`,
         {
           email: email,
           password: password,
@@ -51,7 +51,7 @@ export class AuthenticationService {
   onLogin(email: string, password: string) {
     return this.http
       .post<I_AuthResponseData>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.API_KEY}`,
+        `${environment.SIGNIN_URL}${environment.API_KEY}`,
         {
           email: email,
           password: password,

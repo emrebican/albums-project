@@ -1,3 +1,4 @@
+<!-- Dynamic Component -->
 <ng-template appPlaceholder></ng-template>
 <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
   <h2>Join Us</h2>
@@ -26,7 +27,8 @@
         authForm.get('password')?.invalid &&
         authForm.get('password')?.touched
       "
-      >Type a valid "password"</span
+    >
+      Your "password" must be at least 7 characters</span
     >
   </div>
   <button
