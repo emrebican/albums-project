@@ -2,7 +2,7 @@
   appHighlight
   class="max-w-sm rounded overflow-hidden bg-gray-100 group relative"
 >
-  <div class="op_buttons">
+  <div class="op_buttons" *ngIf="currentUser">
     <button type="button" (click)="onEditAlbum()">
       <fa-icon [icon]="faEdit"></fa-icon>
     </button>
