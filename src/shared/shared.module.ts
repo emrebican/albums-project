@@ -12,6 +12,7 @@ import { PlaceholderDirective } from './directives/placeholder.directive';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { GrayHighlightDirective } from './directives/grayHighlight.directive';
 import { HighlightDirective } from './directives/highlight.directive';
+import { AutofocusDirective } from './directives/autofocus.directive';
 import { UserNamePipe } from './pipes/userName.pipe';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { UserNamePipe } from './pipes/userName.pipe';
     DropdownDirective,
     GrayHighlightDirective,
     HighlightDirective,
+    AutofocusDirective,
     UserNamePipe
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
@@ -36,6 +38,7 @@ import { UserNamePipe } from './pipes/userName.pipe';
     DropdownDirective,
     GrayHighlightDirective,
     HighlightDirective,
+    AutofocusDirective,
     UserNamePipe
   ],
   entryComponents: [AlertComponent]

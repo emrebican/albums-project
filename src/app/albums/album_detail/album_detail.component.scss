@@ -24,6 +24,10 @@
       @apply text-gray-300 mb-4;
     }
 
+    input {
+      @apply text-slate-800 px-2 w-full outline-none;
+    }
+
     ul {
       @apply h-[38%] ml-6 overflow-auto;
 
