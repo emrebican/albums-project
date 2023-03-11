@@ -1,22 +1,16 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { AlertComponent } from 'src/shared/alert/alert.component';
+import { DynamicComponentService } from 'src/services/dynamic-component.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
-import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
 
+import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
 import { I_AuthResponseData } from 'src/shared/models/auth.model';
 
 @Component({
@@ -24,12 +18,9 @@ import { I_AuthResponseData } from 'src/shared/models/auth.model';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthenticationComponent
-  implements OnInit, OnDestroy
-{
+export class AuthenticationComponent implements OnInit {
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost!: PlaceholderDirective;
-  private CLOSE_SUB!: Subscription;
 
   authForm!: FormGroup;
   isLoginMode = true;
@@ -40,7 +31,7 @@ export class AuthenticationComponent
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private dynamicComponentService: DynamicComponentService
   ) {}
 
   ngOnInit(): void {
@@ -54,12 +45,6 @@ export class AuthenticationComponent
         Validators.minLength(7)
       ])
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.CLOSE_SUB) {
-      this.CLOSE_SUB.unsubscribe();
-    }
   }
 
   onSubmit() {
@@ -91,7 +76,11 @@ export class AuthenticationComponent
       },
       (errorMessage) => {
         this.error = errorMessage;
-        this.showErrorAlert(errorMessage);
+        this.dynamicComponentService.showDynamicComponent(
+          errorMessage,
+          this.alertHost,
+          'error'
+        );
       }
     );
 
@@ -104,27 +93,5 @@ export class AuthenticationComponent
 
   onHandleClose() {
     this.error = null;
-  }
-
-  // Programmatically Create Dynamic Component
-  private showErrorAlert(message: string) {
-    const alertCmpFactory =
-      this.componentFactoryResolver.resolveComponentFactory(
-        AlertComponent
-      );
-
-    const hostViewContainerRef = this.alertHost.viewContainerRef;
-    hostViewContainerRef.clear();
-
-    const componentRef =
-      hostViewContainerRef.createComponent(alertCmpFactory);
-
-    componentRef.instance.alertMessage = message;
-    this.CLOSE_SUB = componentRef.instance.close.subscribe(
-      () => {
-        this.CLOSE_SUB.unsubscribe();
-        hostViewContainerRef.clear();
-      }
-    );
   }
 }

@@ -1,6 +1,5 @@
 import {
   Component,
-  ComponentFactoryResolver,
   DoCheck,
   OnDestroy,
   OnInit,
@@ -21,8 +20,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { ShowImageComponent } from 'src/shared/show-image/show-image.component';
 import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
+import { DynamicComponentService } from 'src/services/dynamic-component.service';
 
 @Component({
   selector: 'app-album_detail',
@@ -34,7 +33,6 @@ export class AlbumDetailComponent
 {
   @ViewChild(PlaceholderDirective, { static: true })
   imageHost!: PlaceholderDirective;
-  private IMAGE_SUB!: Subscription;
 
   albumDetail!: Album;
   user = '';
@@ -59,7 +57,7 @@ export class AlbumDetailComponent
     private albumsService: AlbumsService,
     private dataStorageService: DataStorageService,
     private authService: AuthenticationService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private dynamicComponentService: DynamicComponentService
   ) {}
 
   ngOnInit() {
@@ -147,28 +145,10 @@ export class AlbumDetailComponent
   }
 
   onShowImg(url: string) {
-    this.showImage(url);
-  }
-
-  // Dynamic Component Creation
-  private showImage(imgURL: string) {
-    const imageCmpFactory =
-      this.componentFactoryResolver.resolveComponentFactory(
-        ShowImageComponent
-      );
-
-    const hostViewContainerRef = this.imageHost.viewContainerRef;
-    hostViewContainerRef.clear();
-
-    const componentRef =
-      hostViewContainerRef.createComponent(imageCmpFactory);
-
-    componentRef.instance.imageUrl = imgURL;
-    this.IMAGE_SUB = componentRef.instance.close.subscribe(
-      () => {
-        this.IMAGE_SUB.unsubscribe();
-        hostViewContainerRef.clear();
-      }
+    this.dynamicComponentService.showDynamicComponent(
+      url,
+      this.imageHost,
+      'image'
     );
   }
 }
