@@ -14,11 +14,13 @@ import { GrayHighlightDirective } from './directives/grayHighlight.directive';
 import { HighlightDirective } from './directives/highlight.directive';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { UserNamePipe } from './pipes/userName.pipe';
+import { ShowImageComponent } from './show-image/show-image.component';
 
 @NgModule({
   declarations: [
     AlertComponent,
     LoadingSpinnerComponent,
+    ShowImageComponent,
     PlaceholderDirective,
     DropdownDirective,
     GrayHighlightDirective,
@@ -26,7 +28,12 @@ import { UserNamePipe } from './pipes/userName.pipe';
     AutofocusDirective,
     UserNamePipe
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FontAwesomeModule
+  ],
   exports: [
     CommonModule,
     FormsModule,
@@ -34,6 +41,7 @@ import { UserNamePipe } from './pipes/userName.pipe';
     FontAwesomeModule,
     AlertComponent,
     LoadingSpinnerComponent,
+    ShowImageComponent,
     PlaceholderDirective,
     DropdownDirective,
     GrayHighlightDirective,
@@ -41,6 +49,6 @@ import { UserNamePipe } from './pipes/userName.pipe';
     AutofocusDirective,
     UserNamePipe
   ],
-  entryComponents: [AlertComponent]
+  entryComponents: [AlertComponent, ShowImageComponent]
 })
 export class SharedModule {}

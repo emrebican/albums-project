@@ -1,8 +1,10 @@
 import {
   Component,
+  ComponentFactoryResolver,
   DoCheck,
   OnDestroy,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,6 +21,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import { ShowImageComponent } from 'src/shared/show-image/show-image.component';
+import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
 
 @Component({
   selector: 'app-album_detail',
@@ -28,6 +32,10 @@ import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 export class AlbumDetailComponent
   implements OnInit, DoCheck, OnDestroy
 {
+  @ViewChild(PlaceholderDirective, { static: true })
+  imageHost!: PlaceholderDirective;
+  private IMAGE_SUB!: Subscription;
+
   albumDetail!: Album;
   user = '';
   id!: number;
@@ -50,7 +58,8 @@ export class AlbumDetailComponent
     private router: Router,
     private albumsService: AlbumsService,
     private dataStorageService: DataStorageService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit() {
@@ -135,5 +144,31 @@ export class AlbumDetailComponent
 
   onCommentMode() {
     this.commentMode = true;
+  }
+
+  onShowImg(url: string) {
+    this.showImage(url);
+  }
+
+  // Dynamic Component Creation
+  private showImage(imgURL: string) {
+    const imageCmpFactory =
+      this.componentFactoryResolver.resolveComponentFactory(
+        ShowImageComponent
+      );
+
+    const hostViewContainerRef = this.imageHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const componentRef =
+      hostViewContainerRef.createComponent(imageCmpFactory);
+
+    componentRef.instance.imageUrl = imgURL;
+    this.IMAGE_SUB = componentRef.instance.close.subscribe(
+      () => {
+        this.IMAGE_SUB.unsubscribe();
+        hostViewContainerRef.clear();
+      }
+    );
   }
 }

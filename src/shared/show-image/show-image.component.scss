@@ -1,0 +1,25 @@
+.backdrop {
+  @apply fixed top-0 left-0 w-screen h-screen z-50;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.img_box {
+  @apply fixed p-0 bg-transparent;
+  top: 5vh;
+  left: 20vw;
+  width: 60vw;
+  height: 100vh;
+  z-index: 100;
+
+  img {
+    width: 60vw;
+    height: 100vh;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  button {
+    @apply text-2xl text-red-500 p-1 px-3 rounded-sm mt-4 
+    hover:scale-125 hover:text-gray-50 transition-all ease-in-out absolute top-0 right-0;
+  }
+}

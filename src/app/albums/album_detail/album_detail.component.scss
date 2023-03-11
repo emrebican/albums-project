@@ -2,7 +2,7 @@
   @apply flex rounded-lg overflow-hidden drop-shadow-lg;
 
   .detail_img {
-    @apply flex-1;
+    @apply flex-1 cursor-pointer;
 
     img {
       @apply w-full h-96 object-cover;

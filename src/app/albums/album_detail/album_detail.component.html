@@ -1,5 +1,9 @@
+<ng-template appPlaceholder></ng-template>
 <div class="detail_card">
-  <div class="detail_img">
+  <div
+    class="detail_img"
+    (click)="onShowImg(albumDetail.imageURL)"
+  >
     <img
       src="{{ albumDetail?.imageURL }}"
       alt="{{ albumDetail?.title }}"
@@ -58,6 +62,7 @@
       </button>
     </div>
     <button
+      class="mt-8"
       *ngIf="isCommentable && !commentMode"
       (click)="onCommentMode()"
     >
