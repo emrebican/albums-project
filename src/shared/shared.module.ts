@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AlertComponent } from './alert/alert.component';
@@ -20,9 +24,11 @@ import { UserNamePipe } from './pipes/userName.pipe';
     HighlightDirective,
     UserNamePipe
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     AlertComponent,
     LoadingSpinnerComponent,

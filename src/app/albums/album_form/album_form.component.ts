@@ -9,6 +9,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
+import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
 import { I_CanComponentDeactivate } from 'src/shared/models/canDeactivate.model';
 
@@ -27,10 +28,12 @@ export class AlbumFormComponent
   albumForm!: FormGroup;
   changesSaved: boolean = false;
   REGEX = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
+  user: string = '';
 
   constructor(
     private albumsService: AlbumsService,
     private dataStorageService: DataStorageService,
+    private authService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -40,6 +43,9 @@ export class AlbumFormComponent
       this.id = Number(params['id']);
       this.editMode = params['id'] ? true : false;
       this.initForm();
+    });
+    this.authService.user.subscribe((userData) => {
+      this.user = userData.email;
     });
   }
 
@@ -82,6 +88,7 @@ export class AlbumFormComponent
     const newAlbum = new Album(
       this.albumForm.value.title,
       this.albumForm.value.description,
+      this.user,
       this.albumForm.value.imageURL,
       this.albumForm.value.comments,
       edittedAlbum?.reactions
@@ -112,6 +119,7 @@ export class AlbumFormComponent
   private initForm() {
     let albumTitle = '';
     let albumDescription = '';
+    let albumCreated = this.user;
     let albumImageURL = '';
     let albumComments = new FormArray([]);
     let albumReactions = new FormGroup({});

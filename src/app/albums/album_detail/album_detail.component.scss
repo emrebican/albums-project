@@ -10,10 +10,10 @@
   }
 
   .detail_content {
-    @apply flex-1 bg-slate-800 p-10 text-gray-50 relative;
+    @apply flex-1 h-96 bg-slate-800 p-10 text-gray-50 relative;
 
     .btn_cancel {
-      @apply absolute top-6 right-6 text-xl;
+      @apply absolute top-6 right-6 text-xl hover:scale-125 transition-all ease-in-out;
     }
 
     h2 {
@@ -25,10 +25,17 @@
     }
 
     ul {
-      @apply ml-6;
+      @apply h-[38%] ml-6 overflow-auto;
 
       li {
         @apply flex justify-between bg-slate-700 rounded mb-1 p-1 px-2;
+
+        span {
+          @apply text-sm text-gray-300 mr-1;
+        }
+        button {
+          @apply bg-red-400 h-min px-1 hover:bg-red-500 rounded-sm transition-all ease-in-out;
+        }
       }
     }
 
@@ -45,6 +52,14 @@
       }
       .btn_delete {
         @apply bg-red-500 border-red-500;
+      }
+    }
+
+    .created_by {
+      @apply absolute bottom-2 right-10;
+
+      p {
+        @apply text-sm text-gray-400;
       }
     }
   }

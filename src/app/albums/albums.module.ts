@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from 'src/shared/shared.module';
 import { AlbumsRoutingModule } from './albums-routing.module';
@@ -18,10 +17,6 @@ import { AlbumListComponent } from './album_list/album_list.component';
     AlbumFormComponent,
     AlbumDetailComponent
   ],
-  imports: [
-    ReactiveFormsModule,
-    SharedModule,
-    AlbumsRoutingModule
-  ]
+  imports: [SharedModule, AlbumsRoutingModule]
 })
 export class AlbumsModule {}

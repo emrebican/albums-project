@@ -1,10 +1,8 @@
 import {
   Component,
   DoCheck,
-  ElementRef,
   OnDestroy,
-  OnInit,
-  ViewChild
+  OnInit
 } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -30,14 +28,17 @@ import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 export class AlbumDetailComponent
   implements OnInit, DoCheck, OnDestroy
 {
-  @ViewChild('contentInput') content!: ElementRef;
   albumDetail!: Album;
   user = '';
   id!: number;
+
+  content = '';
+  isCommentOK = false;
   commentMode: boolean = false;
-  isCommentable = true;
+  isCommentable: boolean = false;
   SUBSCRIPTION!: Subscription;
 
+  // Icons
   faCancel = faTimesCircle;
   faDeleteComment = faTimes;
   faDelete = faTrashAlt;
@@ -53,33 +54,38 @@ export class AlbumDetailComponent
   ) {}
 
   ngOnInit() {
+    this.SUBSCRIPTION = this.authService.user.subscribe(
+      (userData) => {
+        this.user = userData.email;
+      }
+    );
+
     this.route.params.subscribe((params: Params) => {
       this.id = Number(params['id']);
       this.albumDetail = this.albumsService.getAlbum(
         +params['id']
       );
       this.commentMode = false;
+      this.isCommentable = false;
     });
     console.log(this.albumDetail);
-
-    this.SUBSCRIPTION = this.authService.user.subscribe(
-      (userData) => {
-        this.user = userData.email;
-      }
-    );
+    console.log(this.user);
   }
 
   ngDoCheck(): void {
     if (this.albumDetail.comments.length === 0) {
       this.isCommentable = true;
     } else {
-      this.albumDetail.comments.filter((commentData) => {
-        commentData.author === this.user
-          ? (this.isCommentable = false)
-          : (this.isCommentable = true);
-      });
+      this.isCommentable = this.albumDetail.comments.every(
+        (commentData) => commentData.author !== this.user
+      );
     }
-    console.log(this.isCommentable);
+
+    if (this.content !== '' && this.content.trim()) {
+      this.isCommentOK = true;
+    } else {
+      this.isCommentOK = false;
+    }
   }
 
   ngOnDestroy(): void {
@@ -95,20 +101,15 @@ export class AlbumDetailComponent
 
   onDeleteAlbum() {
     this.albumsService.deleteAlbum(this.id);
-    this.dataStorageService
-      .storeAlbums()
-      .subscribe((responseData) => {
-        console.log(responseData);
-        this.router.navigate(['/albums'], {
-          relativeTo: this.route
-        });
-      });
+    this.dataStorageService.storeAlbums().subscribe();
   }
 
   onAddComment() {
-    this.albumDetail.comments.push(
-      new Comment(this.user, this.content.nativeElement.value)
-    );
+    this.content !== '' && this.content.trim()
+      ? this.albumDetail.comments.push(
+          new Comment(this.user, this.content)
+        )
+      : null;
 
     this.dataStorageService
       .storeAlbums()
@@ -121,6 +122,7 @@ export class AlbumDetailComponent
     if (this.albumDetail.comments[index].author === this.user) {
       this.albumDetail.comments.splice(index, 1);
 
+      this.content = '';
       this.dataStorageService.storeAlbums().subscribe();
     }
   }

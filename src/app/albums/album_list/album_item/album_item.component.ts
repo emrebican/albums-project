@@ -57,26 +57,9 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
     this.SUBSCRIPTION.unsubscribe();
   }
 
-  private onStore() {
-    this.dataStorageService
-      .storeAlbums()
-      .subscribe((resData) => {
-        console.log(resData);
-      });
-  }
-
   onDeleteAlbum() {
-    if (this.currentUser) {
-      this.albumsService.deleteAlbum(this.index);
-      this.onStore();
-      this.router.navigate(['/albums'], {
-        relativeTo: this.route
-      });
-    } else {
-      this.router.navigate(['/auth'], {
-        relativeTo: this.route
-      });
-    }
+    this.albumsService.deleteAlbum(this.index);
+    this.onStore();
   }
 
   onEditAlbum() {
@@ -106,6 +89,10 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
         relativeTo: this.route
       });
     }
+  }
+
+  private onStore() {
+    this.dataStorageService.storeAlbums().subscribe();
   }
 
   private addIconCount(index: number, type: string) {
