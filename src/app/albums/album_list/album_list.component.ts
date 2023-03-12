@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
-import { AuthenticationService } from 'src/services/authentication/auth.service';
-
 import { Album } from '../../../shared/models/album.model';
 
 @Component({
@@ -15,10 +13,7 @@ export class AlbumListComponent implements OnInit, OnDestroy {
   private SUBSCRIPTION!: Subscription;
   albums: Album[] = [];
 
-  constructor(
-    private albumsService: AlbumsService,
-    private authService: AuthenticationService
-  ) {}
+  constructor(private albumsService: AlbumsService) {}
 
   ngOnInit(): void {
     this.albums = this.albumsService.getAlbums();

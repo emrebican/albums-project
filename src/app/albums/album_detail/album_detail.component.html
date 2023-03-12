@@ -37,7 +37,7 @@
     </ul>
 
     <!-- add comment -->
-    <div class="flex gap-2 ml-6 mt-6" *ngIf="commentMode">
+    <div class="flex gap-2 ml-6 mt-4" *ngIf="commentMode">
       <input
         type="text"
         placeholder="type your comment"
@@ -62,7 +62,7 @@
       </button>
     </div>
     <button
-      class="mt-8"
+      class="mt-5"
       *ngIf="isCommentable && !commentMode"
       (click)="onCommentMode()"
     >

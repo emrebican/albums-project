@@ -118,6 +118,8 @@ export class AlbumDetailComponent
         )
       : null;
 
+    this.content = '';
+
     this.dataStorageService
       .storeAlbums()
       .subscribe((responseData) => {
