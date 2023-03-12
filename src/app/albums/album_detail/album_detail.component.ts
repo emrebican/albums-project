@@ -44,6 +44,9 @@ export class AlbumDetailComponent
   isCommentable: boolean = false;
   SUBSCRIPTION!: Subscription;
 
+  editMode = false;
+  editIndex!: number;
+
   // Icons
   faCancel = faTimesCircle;
   faDeleteComment = faTimes;
@@ -75,8 +78,6 @@ export class AlbumDetailComponent
       this.commentMode = false;
       this.isCommentable = false;
     });
-    console.log(this.albumDetail);
-    console.log(this.user);
   }
 
   ngDoCheck(): void {
@@ -112,19 +113,38 @@ export class AlbumDetailComponent
   }
 
   onAddComment() {
-    this.content !== '' && this.content.trim()
-      ? this.albumDetail.comments.push(
-          new Comment(this.user, this.content)
-        )
-      : null;
+    if (this.editMode) {
+      this.content !== '' && this.content.trim()
+        ? (this.albumDetail.comments[this.editIndex].content =
+            this.content)
+        : null;
 
-    this.content = '';
+      this.editMode = false;
+      this.content = '';
+    } else {
+      this.content !== '' && this.content.trim()
+        ? this.albumDetail.comments.push(
+            new Comment(this.user, this.content)
+          )
+        : null;
+
+      this.content = '';
+    }
 
     this.dataStorageService
       .storeAlbums()
       .subscribe((responseData) => {
         this.commentMode = false;
       });
+  }
+
+  onEditComment(index: number) {
+    if (this.albumDetail.comments[index].author === this.user) {
+      this.editMode = true;
+      this.commentMode = true;
+      this.editIndex = index;
+      this.content = this.albumDetail.comments[index].content;
+    }
   }
 
   onDeleteComment(index: number) {

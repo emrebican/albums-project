@@ -21,7 +21,11 @@
 
     <ul>
       <li
+        (click)="onEditComment(i)"
         *ngFor="let item of albumDetail?.comments; let i = index"
+        [ngClass]="{
+          'cursor-pointer': item.author === user ? true : false
+        }"
       >
         <article>
           <span>{{ item.author | username : '@' }} :</span>
