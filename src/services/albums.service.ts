@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { Album } from '../shared/models/album.model';
 
@@ -8,6 +8,8 @@ import { Album } from '../shared/models/album.model';
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
   private albums: Album[] = [];
+  // isFiltered = new BehaviorSubject<boolean>(false);
+  isFiltered = false;
 
   constructor(
     private router: Router,

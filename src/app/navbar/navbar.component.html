@@ -55,12 +55,14 @@
             src="../../assets/2048px-Angular_full_color_logo.svg.png"
             alt="Your Company"
             routerLink="/"
+            (click)="onCancelFiltered()"
           />
           <img
             class="hidden h-10 w-auto lg:block cursor-pointer"
             src="../../assets/2048px-Angular_full_color_logo.svg.png"
             alt="Your Company"
             routerLink="/"
+            (click)="onCancelFiltered()"
           />
         </div>
         <div class="hidden sm:ml-6 sm:block">
@@ -69,9 +71,9 @@
               routerLink="/albums"
               routerLinkActive="active"
               class="nav_link"
+              (click)="onCancelFiltered()"
               >Album</a
             >
-
             <a
               *ngIf="isAuthenticated"
               routerLink="/new-album"
@@ -144,6 +146,15 @@
                 tabindex="-1"
                 id="user-menu-item-0"
                 appGrayHighlight
+                (click)="onFilteredAlbums()"
+                >My Uploads</a
+              >
+              <a
+                class="block px-4 py-2 text-sm text-gray-700 cursor-pointer"
+                role="menuitem"
+                tabindex="-1"
+                id="user-menu-item-0"
+                appGrayHighlight
                 (click)="onLogout()"
                 >Log Out</a
               >
@@ -162,6 +173,7 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         class="mobile_link"
+        (click)="onCancelFiltered()"
         >Album</a
       >
       <a

@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
 
@@ -19,7 +21,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthenticationService,
-    private dataStorageService: DataStorageService
+    private dataStorageService: DataStorageService,
+    private albumsService: AlbumsService
   ) {}
 
   ngOnInit() {
@@ -66,5 +69,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log('Albums Fetched');
       this.isFetching = false;
     });
+  }
+
+  onFilteredAlbums() {
+    this.albumsService.isFiltered = true;
+  }
+
+  onCancelFiltered() {
+    this.albumsService.isFiltered = false;
   }
 }
