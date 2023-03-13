@@ -46,6 +46,10 @@ export class AlbumsService {
 
   // for AlbumDetail
   getAlbum(index: number) {
-    return this.albums[index];
+    const albumIndex: number = this.albums.findIndex((album) => {
+      return album.id === index;
+    });
+
+    return this.albums[albumIndex];
   }
 }

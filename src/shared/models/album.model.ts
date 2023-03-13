@@ -8,6 +8,7 @@ export class Album {
   public imageURL: string;
   public comments: Comment[];
   public reactions: Reaction;
+  public id: number;
 
   constructor(
     title: string,
@@ -15,7 +16,8 @@ export class Album {
     createdBy: string,
     imageURL: string,
     comments: Comment[],
-    reactions: Reaction
+    reactions: Reaction,
+    id: number
   ) {
     this.title = title;
     this.description = description;
@@ -23,5 +25,6 @@ export class Album {
     this.imageURL = imageURL;
     this.comments = comments;
     this.reactions = reactions;
+    this.id = id;
   }
 }

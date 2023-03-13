@@ -91,7 +91,8 @@ export class AlbumFormComponent
       this.user,
       this.albumForm.value.imageURL,
       this.albumForm.value.comments,
-      edittedAlbum?.reactions
+      edittedAlbum?.reactions,
+      new Date().getTime()
     );
 
     this.changesSaved = true;

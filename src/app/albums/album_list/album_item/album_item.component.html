@@ -13,7 +13,7 @@
       <fa-icon [icon]="faDelete"></fa-icon>
     </button>
   </div>
-  <a [routerLink]="[index]" fragment="details">
+  <a [routerLink]="[album.id]" fragment="details">
     <img
       class="w-96 h-80 object-cover"
       src="{{ album.imageURL }}"
@@ -30,7 +30,7 @@
     <!-- thumb -->
     <span
       class="item_icon cursor-pointer relative"
-      (click)="addThumb(index)"
+      (click)="addThumb(album.id)"
     >
       <fa-icon [icon]="faThumbsUp"></fa-icon>
       <span class="item_badge">
@@ -53,7 +53,7 @@
     <!-- like -->
     <span
       class="item_icon cursor-pointer relative"
-      (click)="addLike(index)"
+      (click)="addLike(album.id)"
     >
       <fa-icon [icon]="faHeart"></fa-icon>
       <span class="item_badge">
