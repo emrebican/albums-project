@@ -30,14 +30,19 @@ export class AlbumsService {
   }
 
   updateAlbum(index: number, updatedAlbum: Album) {
-    this.albums[index] = updatedAlbum;
+    const albumIndex = this.getIndex(index);
+    this.albums[albumIndex] = updatedAlbum;
+
     this.albumsChanged.next(this.albums.slice());
   }
 
   deleteAlbum(index: number) {
     if (confirm('Are you sure that you want to delete?')) {
-      this.albums.splice(index, 1);
+      const albumIndex = this.getIndex(index);
+
+      this.albums.splice(albumIndex, 1);
       this.albumsChanged.next(this.albums.slice());
+
       this.router.navigate(['/albums'], {
         relativeTo: this.route
       });
@@ -46,10 +51,17 @@ export class AlbumsService {
 
   // for AlbumDetail
   getAlbum(index: number) {
-    const albumIndex: number = this.albums.findIndex((album) => {
+    /* const albumIndex: number = this.albums.findIndex((album) => {
       return album.id === index;
-    });
+    }); */
+    const albumIndex = this.getIndex(index);
 
     return this.albums[albumIndex];
+  }
+
+  private getIndex(index: number) {
+    return this.albums.findIndex((album) => {
+      return album.id === index;
+    });
   }
 }

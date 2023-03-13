@@ -69,9 +69,9 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  addThumb(index: number) {
+  addThumb() {
     if (this.currentUser) {
-      this.addIconCount(index, 'thumb');
+      this.addIconCount(this.index, 'thumb');
       this.onStore();
     } else {
       this.router.navigate(['/auth'], {
@@ -80,9 +80,9 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
     }
   }
 
-  addLike(index: number) {
+  addLike() {
     if (this.currentUser) {
-      this.addIconCount(index, 'like');
+      this.addIconCount(this.index, 'like');
       this.onStore();
     } else {
       this.router.navigate(['/auth'], {

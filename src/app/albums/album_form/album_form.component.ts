@@ -47,6 +47,7 @@ export class AlbumFormComponent
     this.authService.user.subscribe((userData) => {
       this.user = userData.email;
     });
+    console.log('ID: ', this.id);
   }
 
   canDeactivate():
@@ -92,7 +93,7 @@ export class AlbumFormComponent
       this.albumForm.value.imageURL,
       this.albumForm.value.comments,
       edittedAlbum?.reactions,
-      new Date().getTime()
+      this.editMode ? this.id : new Date().getTime()
     );
 
     this.changesSaved = true;

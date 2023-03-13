@@ -4,6 +4,6 @@
   <app-album_item
     *ngFor="let albumItem of albums; let i = index"
     [album]="albumItem"
-    [index]="i"
+    [index]="albumItem.id"
   ></app-album_item>
 </div>
