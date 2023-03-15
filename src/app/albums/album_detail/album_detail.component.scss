@@ -1,16 +1,16 @@
 .detail_card {
-  @apply flex rounded-lg overflow-hidden drop-shadow-lg;
+  @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg mb-6 h-[52rem] transition-all ease-in-out duration-100 md:h-[30rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
 
   .detail_img {
-    @apply flex-1 cursor-pointer;
+    @apply flex-1 cursor-pointer h-full;
 
     img {
-      @apply w-full h-96 object-cover;
+      @apply w-full h-full object-cover;
     }
   }
 
   .detail_content {
-    @apply flex-1 h-96 bg-slate-800 p-10 text-gray-50 relative;
+    @apply flex-1 h-full bg-slate-800 p-10 text-gray-50 relative;
 
     .btn_cancel {
       @apply absolute top-6 right-6 text-xl hover:scale-125 transition-all ease-in-out;

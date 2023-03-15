@@ -1,6 +1,6 @@
 <div
   appHighlight
-  class="max-w-sm rounded overflow-hidden bg-gray-100 group relative"
+  class="max-w-sm h-[28.2rem] rounded overflow-hidden bg-gray-100 group relative flex flex-col justify-between"
 >
   <div
     class="op_buttons"
@@ -15,18 +15,18 @@
   </div>
   <a [routerLink]="[album.id]" fragment="details">
     <img
-      class="w-96 h-80 object-cover"
+      class="w-96 h-64 object-cover"
       src="{{ album.imageURL }}"
       alt="{{ album.title }}"
     />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ album.title }}</div>
       <p class="text-gray-700 text-base">
-        {{ album.description }}
+        {{ album.description | shorten : 9 }}
       </p>
     </div>
   </a>
-  <div class="px-6 pt-4 pb-2 text-center">
+  <div class="px-6 pt-2 pb-2 text-center">
     <!-- thumb -->
     <span
       class="item_icon cursor-pointer relative"

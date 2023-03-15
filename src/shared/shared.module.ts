@@ -15,6 +15,7 @@ import { GrayHighlightDirective } from './directives/grayHighlight.directive';
 import { HighlightDirective } from './directives/highlight.directive';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { UserNamePipe } from './pipes/userName.pipe';
+import { ShortenPipe } from './pipes/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UserNamePipe } from './pipes/userName.pipe';
     GrayHighlightDirective,
     HighlightDirective,
     AutofocusDirective,
-    UserNamePipe
+    UserNamePipe,
+    ShortenPipe
   ],
   imports: [
     CommonModule,
@@ -47,7 +49,8 @@ import { UserNamePipe } from './pipes/userName.pipe';
     GrayHighlightDirective,
     HighlightDirective,
     AutofocusDirective,
-    UserNamePipe
+    UserNamePipe,
+    ShortenPipe
   ],
   entryComponents: [AlertComponent, ShowImageComponent]
 })

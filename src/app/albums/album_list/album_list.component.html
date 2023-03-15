@@ -5,7 +5,7 @@
   class="flex items-center flex-col md:grid md:items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
 >
   <p *ngIf="!albums.length" class="text-slate-500">
-    There is no Album that you uploaded!
+    There is no Album here!
   </p>
   <app-album_item
     *ngFor="let albumItem of albums; let i = index"

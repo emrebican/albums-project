@@ -53,7 +53,6 @@ export class AlbumListComponent
         this.albumsService.albumsChanged.subscribe(
           (albums: Album[]) => {
             this.albums = albums;
-            console.log(this.albums);
           }
         );
     }

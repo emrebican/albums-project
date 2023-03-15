@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import { Album } from '../shared/models/album.model';
 
@@ -8,7 +8,6 @@ import { Album } from '../shared/models/album.model';
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
   private albums: Album[] = [];
-  // isFiltered = new BehaviorSubject<boolean>(false);
   isFiltered = false;
 
   constructor(
@@ -39,7 +38,9 @@ export class AlbumsService {
   }
 
   deleteAlbum(index: number) {
-    if (confirm('Are you sure that you want to delete?')) {
+    if (
+      confirm('Are you sure that you want to delete this Album?')
+    ) {
       const albumIndex = this.getIndex(index);
 
       this.albums.splice(albumIndex, 1);
@@ -53,9 +54,6 @@ export class AlbumsService {
 
   // for AlbumDetail
   getAlbum(index: number) {
-    /* const albumIndex: number = this.albums.findIndex((album) => {
-      return album.id === index;
-    }); */
     const albumIndex = this.getIndex(index);
 
     return this.albums[albumIndex];

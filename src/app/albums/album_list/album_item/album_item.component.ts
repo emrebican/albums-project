@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
+
 import { Album } from '../../../../shared/models/album.model';
 
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';

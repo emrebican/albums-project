@@ -1,3 +1,4 @@
+<!-- Dynamic Component -->
 <ng-template appPlaceholder></ng-template>
 <div class="detail_card">
   <div
@@ -16,9 +17,10 @@
 
     <div>
       <h2>{{ albumDetail?.title }}</h2>
-      <p>{{ albumDetail?.description }}</p>
+      <p>
+        {{ albumDetail?.description | shorten : 12 }}
+      </p>
     </div>
-
     <ul>
       <li
         (click)="onEditComment(i)"

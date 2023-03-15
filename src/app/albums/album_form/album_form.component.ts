@@ -146,7 +146,10 @@ export class AlbumFormComponent
     }
 
     this.albumForm = new FormGroup({
-      title: new FormControl(albumTitle, Validators.required),
+      title: new FormControl(albumTitle, [
+        Validators.required,
+        Validators.maxLength(40)
+      ]),
       description: new FormControl(
         albumDescription,
         Validators.required
