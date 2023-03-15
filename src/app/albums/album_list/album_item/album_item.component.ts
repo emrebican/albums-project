@@ -1,5 +1,6 @@
 import {
   Component,
+  DoCheck,
   Input,
   OnDestroy,
   OnInit
@@ -14,8 +15,11 @@ import { DataStorageService } from 'src/services/data_storage.service';
 import { Album } from '../../../../shared/models/album.model';
 
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faThumbsUp as faThumbsUpActive } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartActive } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faComment as faCommentActive } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
@@ -24,7 +28,9 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
   templateUrl: './album_item.component.html',
   styleUrls: ['./album_item.component.scss']
 })
-export class AlbumItemComponent implements OnInit, OnDestroy {
+export class AlbumItemComponent
+  implements OnInit, OnDestroy, DoCheck
+{
   @Input('album') album!: Album;
   @Input() index!: number;
   SUBSCRIPTION!: Subscription;
@@ -32,9 +38,16 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
   selectedAlbum!: Album;
   currentUser = '';
 
+  isThumb = false;
+  isLike = false;
+  isComment = false;
+
   faThumbsUp = faThumbsUp;
   faHeart = faHeart;
   faComment = faComment;
+  faThumbsUpActive = faThumbsUpActive;
+  faHeartActive = faHeartActive;
+  faCommentActive = faCommentActive;
   faDelete = faTrash;
   faEdit = faEdit;
 
@@ -52,6 +65,12 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
         this.currentUser = userData.email;
       }
     );
+
+    this.activeIcon();
+  }
+
+  ngDoCheck(): void {
+    this.activeIcon();
   }
 
   ngOnDestroy(): void {
@@ -90,6 +109,29 @@ export class AlbumItemComponent implements OnInit, OnDestroy {
         relativeTo: this.route
       });
     }
+  }
+
+  private activeIcon() {
+    // isThumb
+    this.album.reactions.users.includes(
+      this.currentUser + 'thumb'
+    )
+      ? (this.isThumb = true)
+      : (this.isThumb = false);
+
+    // isLike
+    this.album.reactions.users.includes(
+      this.currentUser + 'like'
+    )
+      ? (this.isLike = true)
+      : (this.isLike = false);
+
+    // isComment
+    this.album.comments.some(
+      (comment) => comment.author === this.currentUser
+    )
+      ? (this.isComment = true)
+      : (this.isComment = false);
   }
 
   private onStore() {

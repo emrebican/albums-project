@@ -32,7 +32,9 @@
       class="item_icon cursor-pointer relative"
       (click)="addThumb()"
     >
-      <fa-icon [icon]="faThumbsUp"></fa-icon>
+      <fa-icon
+        [icon]="isThumb ? faThumbsUpActive : faThumbsUp"
+      ></fa-icon>
       <span class="item_badge">
         {{ album?.reactions?.reacts?.thumb }}
       </span>
@@ -55,7 +57,9 @@
       class="item_icon cursor-pointer relative"
       (click)="addLike()"
     >
-      <fa-icon [icon]="faHeart"></fa-icon>
+      <fa-icon
+        [icon]="isLike ? faHeartActive : faHeart"
+      ></fa-icon>
       <span class="item_badge">
         {{ album?.reactions?.reacts?.like }}
       </span>
@@ -75,7 +79,9 @@
     </span>
     <!-- comment -->
     <span class="item_icon cursor-pointer relative">
-      <fa-icon [icon]="faComment"></fa-icon>
+      <fa-icon
+        [icon]="isComment ? faCommentActive : faComment"
+      ></fa-icon>
       <span class="item_badge">
         {{ album.comments.length }}
       </span>
