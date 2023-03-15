@@ -11,10 +11,12 @@
 }
 
 .alert_box {
+  @apply w-[80vw] left-[10vw] 
+  md:w-[60vw] md:left-[20vw] 
+  lg:w-[40vw] lg:left-[30vw];
+
   position: fixed;
   top: 30vh;
-  left: 30vw;
-  width: 40vw;
   padding: 20px;
   z-index: 100;
   background-color: $white-color;

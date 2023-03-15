@@ -1,18 +1,18 @@
 @import '../../variables';
 
 .detail_card {
-  @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg mb-6 h-[52rem] transition-all ease-in-out duration-100 md:h-[30rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
+  @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg h-[52rem] transition-all ease-in-out duration-100 md:h-[30rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
 
   .detail_img {
     @apply flex-1 cursor-pointer h-full;
 
     img {
-      @apply w-full h-full object-cover;
+      @apply w-full h-96 md:h-full object-cover;
     }
   }
 
   .detail_content {
-    @apply flex-1 h-full  p-10 relative;
+    @apply flex-1 h-full p-10 relative;
     background: $dark-color;
     color: $gray-50;
 
@@ -25,8 +25,11 @@
     }
 
     p {
-      @apply mb-4;
+      @apply mb-4 cursor-pointer;
       color: $gray-300;
+      &:hover {
+        color: $gray-50;
+      }
     }
 
     input {

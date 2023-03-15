@@ -34,6 +34,9 @@ export class AlbumDetailComponent
   @ViewChild(PlaceholderDirective, { static: true })
   imageHost!: PlaceholderDirective;
 
+  @ViewChild(PlaceholderDirective, { static: true })
+  descriptionHost!: PlaceholderDirective;
+
   albumDetail!: Album;
   user = '';
   id!: number;
@@ -171,6 +174,14 @@ export class AlbumDetailComponent
       url,
       this.imageHost,
       'image'
+    );
+  }
+
+  onShowDescription() {
+    this.dynamicComponentService.showDynamicComponent(
+      this.albumDetail.description,
+      this.descriptionHost,
+      'error'
     );
   }
 }

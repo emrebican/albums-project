@@ -17,7 +17,7 @@
 
     <div>
       <h2>{{ albumDetail?.title }}</h2>
-      <p>
+      <p (click)="onShowDescription()">
         {{ albumDetail?.description | shorten : 12 }}
       </p>
     </div>
