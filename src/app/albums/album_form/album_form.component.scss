@@ -1,5 +1,8 @@
+@import '../../variables';
+
 .title {
-  @apply text-2xl text-center text-slate-800 font-sans font-semibold;
+  @apply text-2xl text-center font-sans font-semibold;
+  color: $dark-color;
 }
 
 form {
@@ -15,10 +18,15 @@ form {
 
   input,
   textarea {
-    @apply w-full h-9 border-2 border-gray-300
+    @apply w-full h-9 border-2 
             transition-all duration-200 ease-in
             text-sm font-sans tracking-wider mt-1
-            rounded p-3 outline-none focus:border-slate-800;
+            rounded p-3 outline-none;
+    border-color: $gray-300;
+
+    &:focus {
+      border-color: $dark-color;
+    }
   }
 
   textarea {
@@ -26,18 +34,27 @@ form {
   }
 
   .add_btn {
-    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent
-    transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
+    @apply w-full rounded py-2 mt-5 border-2 border-transparent
+    transition-all duration-200 ease-in hover:bg-transparent
     hover:font-bold;
+    color: $gray-50;
+    background: $dark-color;
+
+    &:hover {
+      border-color: $dark-color;
+      color: $dark-color;
+    }
   }
 
   .disabled_btn {
-    @apply text-gray-50 w-full bg-slate-500 rounded py-2 mt-5 border-2 border-transparent
+    @apply w-full  rounded py-2 mt-5 border-2 border-transparent
     transition-all duration-200 ease-in;
+    color: $gray-50;
+    background: $slate-500;
   }
 
   input.ng-invalid.ng-touched,
   textarea.ng-invalid.ng-touched {
-    @apply border-red-400;
+    border-color: $red-400;
   }
 }

@@ -1,3 +1,5 @@
+@import '../../variables';
+
 .detail_card {
   @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg mb-6 h-[52rem] transition-all ease-in-out duration-100 md:h-[30rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
 
@@ -10,7 +12,9 @@
   }
 
   .detail_content {
-    @apply flex-1 h-full bg-slate-800 p-10 text-gray-50 relative;
+    @apply flex-1 h-full  p-10 relative;
+    background: $dark-color;
+    color: $gray-50;
 
     .btn_cancel {
       @apply absolute top-6 right-6 text-xl hover:scale-125 transition-all ease-in-out;
@@ -21,24 +25,33 @@
     }
 
     p {
-      @apply text-gray-300 mb-4;
+      @apply mb-4;
+      color: $gray-300;
     }
 
     input {
-      @apply text-slate-800 px-2 w-full outline-none;
+      @apply px-2 w-full outline-none;
+      color: $dark-color;
     }
 
     ul {
       @apply h-[42%] ml-6 overflow-auto;
 
       li {
-        @apply flex justify-between bg-slate-700 rounded mb-1 p-1 px-2;
+        @apply flex justify-between rounded mb-1 p-1 px-2;
+        background: $slate-700;
 
         span {
-          @apply text-sm text-gray-300 mr-1;
+          @apply text-sm mr-1;
+          color: $gray-300;
         }
         button {
-          @apply bg-red-400 h-min px-1 hover:bg-red-500 rounded-sm transition-all ease-in-out;
+          @apply h-min px-1 rounded-sm transition-all ease-in-out;
+          background: $red-400;
+
+          &:hover {
+            background: $red-500;
+          }
         }
       }
     }
@@ -52,10 +65,12 @@
       }
 
       .btn_edit {
-        @apply bg-green-600 border-green-600;
+        background: $green-600;
+        border-color: $green-600;
       }
       .btn_delete {
-        @apply bg-red-500 border-red-500;
+        background: $red-500;
+        border-color: $red-500;
       }
     }
 
@@ -63,7 +78,8 @@
       @apply absolute bottom-2 right-10;
 
       p {
-        @apply text-sm text-gray-400;
+        @apply text-sm;
+        color: $gray-400;
       }
     }
   }

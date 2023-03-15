@@ -1,12 +1,15 @@
+@import './variables';
+
 .app_container {
   @apply container mx-auto mt-10;
 
   min-height: calc(100vh - 158px);
 }
 .footer_text {
-  @apply text-center text-sm text-gray-500 py-2;
+  @apply text-center text-sm py-2;
+  color: $gray-500;
 
   span {
-    @apply text-slate-800;
+    color: $dark-color;
   }
 }

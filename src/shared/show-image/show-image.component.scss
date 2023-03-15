@@ -1,3 +1,5 @@
+@import '../../app/variables';
+
 .backdrop {
   @apply fixed top-0 left-0 w-screen h-screen z-50;
   background: rgba(0, 0, 0, 0.75);
@@ -19,7 +21,12 @@
   }
 
   button {
-    @apply text-2xl text-red-500 p-1 px-3 rounded-sm mt-4 
-    hover:scale-125 hover:text-gray-50 transition-all ease-in-out absolute top-0 right-0;
+    @apply text-2xl p-1 px-3 rounded-sm mt-4 
+    hover:scale-125 transition-all ease-in-out absolute top-0 right-0;
+
+    color: $red-500;
+    &:hover {
+      color: $gray-50;
+    }
   }
 }

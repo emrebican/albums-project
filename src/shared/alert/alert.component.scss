@@ -1,3 +1,5 @@
+@import '../../app/variables';
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -15,10 +17,24 @@
   width: 40vw;
   padding: 20px;
   z-index: 100;
-  background-color: #fff;
+  background-color: $white-color;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+
+  p {
+    @apply text-lg;
+    color: $dark-color;
+  }
 }
 
 .alert_actions {
   text-align: right;
+
+  button {
+    @apply p-1 px-3 rounded-sm mt-4;
+    background: $red-500;
+    color: $gray-50;
+    &:hover {
+      background: $dark-color;
+    }
+  }
 }

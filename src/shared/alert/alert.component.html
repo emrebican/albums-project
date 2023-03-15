@@ -1,12 +1,7 @@
 <div class="backdrop" (click)="onClose()"></div>
 <div class="alert_box rounded">
-  <p class="text-slate-800 text-lg">{{ alertMessage }}</p>
+  <p>{{ alertMessage }}</p>
   <div class="alert_actions">
-    <button
-      class="bg-red-500 text-gray-50 p-1 px-3 rounded-sm mt-4 hover:bg-slate-800"
-      (click)="onClose()"
-    >
-      Close
-    </button>
+    <button (click)="onClose()">Close</button>
   </div>
 </div>

@@ -1,3 +1,5 @@
+@import '../variables';
+
 div {
   @apply w-full h-60 flex flex-col gap-8 items-center justify-center;
 
@@ -5,11 +7,21 @@ div {
     @apply text-slate-800 text-3xl font-semibold;
 
     span {
-      @apply text-4xl font-thin text-slate-400;
+      @apply text-4xl font-thin;
+      color: $slate-400;
     }
   }
 
   a {
-    @apply border border-blue-600 text-blue-600 p-2 rounded-sm hover:font-semibold hover:bg-blue-600 hover:text-gray-50 transition-all ease-in-out;
+    @apply border p-2 rounded-sm hover:font-semibold transition-all ease-in-out;
+    color: $blue-600;
+    border-color: $blue-600;
+    &:hover {
+      background: $blue-600;
+    }
+
+    &:hover {
+      color: $gray-50;
+    }
   }
 }

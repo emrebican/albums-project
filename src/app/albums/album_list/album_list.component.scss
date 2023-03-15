@@ -1,0 +1,14 @@
+@import '../../variables';
+
+.list_text {
+  @apply text-xl text-left uppercase mb-6 ml-6;
+  color: $dark-color;
+}
+
+.list_container {
+  @apply flex items-center flex-col md:grid md:items-start md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+
+  p {
+    color: $slate-500;
+  }
+}

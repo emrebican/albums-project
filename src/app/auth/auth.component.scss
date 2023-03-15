@@ -1,3 +1,5 @@
+@import '../variables';
+
 form {
   @apply mt-8 w-full px-20 sm:px-0 sm:w-1/2 mx-auto;
 
@@ -15,10 +17,14 @@ form {
 
   input,
   textarea {
-    @apply w-full h-9 border-2 border-gray-300
-              transition-all duration-200 ease-in
-              text-sm font-sans tracking-wider mt-1
-              rounded p-3 outline-none focus:border-slate-800;
+    @apply w-full h-9 border-2 transition-all duration-200 ease-in 
+    text-sm font-sans tracking-wider mt-1 rounded p-3 outline-none;
+
+    border-color: $gray-300;
+
+    &:focus {
+      border-color: $dark-color;
+    }
   }
 
   textarea {
@@ -26,9 +32,15 @@ form {
   }
 
   .signup_btn {
-    @apply text-gray-50 w-full bg-slate-800 rounded py-2 mt-5 border-2 border-transparent uppercase
-    transition-all duration-200 ease-in hover:bg-transparent hover:border-slate-800 hover:text-slate-800
-    hover:font-bold;
+    @apply w-full rounded py-2 mt-5 border-2 border-transparent uppercase
+    transition-all duration-200 ease-in hover:bg-transparent hover:font-bold;
+
+    color: $gray-50;
+    background: $dark-color;
+    &:hover {
+      border-color: $dark-color;
+      color: $dark-color;
+    }
   }
 
   .switch_btn {
@@ -36,11 +48,18 @@ form {
   }
 
   .disabled_btn {
-    @apply text-gray-50 w-full bg-slate-500 rounded py-2 mt-5 border-2 border-transparent
+    @apply w-full rounded py-2 mt-5 border-2 border-transparent
     uppercase transition-all duration-200 ease-in;
+    color: $gray-50;
+    background: $slate-500;
   }
 
   input.ng-invalid.ng-touched {
-    @apply border-red-400;
+    border-color: $red-400;
+  }
+
+  .input_container {
+    @apply text-sm;
+    color: $gray-500;
   }
 }

@@ -1,15 +1,41 @@
+@import '../variables';
+
+nav {
+  background: $dark-color;
+}
+
 .burger_icon {
-  @apply inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white;
+  @apply inline-flex items-center justify-center rounded-md p-2;
+  color: $gray-400;
+  &:hover {
+    background: $gray-700;
+    color: $white-color;
+  }
 }
 
 .nav_link {
-  @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-sm text-sm font-medium;
+  @apply px-3 py-2 rounded-sm text-sm font-medium;
+  color: $gray-300;
+  &:hover {
+    background: $gray-700;
+    color: $white-color;
+  }
 }
 
 .mobile_link {
-  @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-sm text-base font-medium;
+  @apply block px-3 py-2 rounded-sm text-base font-medium;
+  color: $gray-300;
+  &:hover {
+    background: $gray-700;
+    color: $white-color;
+  }
 }
 
 .active {
-  @apply bg-gray-900 text-white;
+  color: $white-color;
+  background: $gray-900;
+}
+
+a {
+  color: $gray-700;
 }

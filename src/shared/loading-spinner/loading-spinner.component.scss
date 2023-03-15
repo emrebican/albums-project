@@ -1,3 +1,5 @@
+@import '../../app/variables';
+
 @keyframes ldio-0y4ms8715g9 {
   0% {
     opacity: 1;
@@ -15,7 +17,7 @@
   width: 15.72px;
   height: 15.72px;
   border-radius: 50%;
-  background: #dc2626;
+  background: $red-600;
   animation: ldio-0y4ms8715g9 1s linear infinite;
 }
 .ldio-0y4ms8715g9 div:nth-child(1) > div {
@@ -95,7 +97,7 @@
   height: 131px;
   display: inline-block;
   overflow: hidden;
-  background: #f9fafb;
+  background: $gray-50;
 }
 .ldio-0y4ms8715g9 {
   width: 100%;
