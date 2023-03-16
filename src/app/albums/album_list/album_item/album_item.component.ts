@@ -37,6 +37,7 @@ export class AlbumItemComponent
 
   selectedAlbum!: Album;
   currentUser = '';
+  currentId!: number;
 
   isThumb = false;
   isLike = false;
@@ -109,6 +110,25 @@ export class AlbumItemComponent
         relativeTo: this.route
       });
     }
+  }
+
+  onSendId(id: number) {
+    this.currentId = this.albumsService.currentId;
+
+    if (this.currentId !== id) {
+      this.onScrollTop();
+    }
+  }
+
+  private onScrollTop() {
+    let scrollToTop = window.setInterval(() => {
+      let pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 20);
+      } else {
+        window.clearInterval(scrollToTop);
+      }
+    }, 8);
   }
 
   private activeIcon() {

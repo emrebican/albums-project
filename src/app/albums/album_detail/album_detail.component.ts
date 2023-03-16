@@ -80,6 +80,7 @@ export class AlbumDetailComponent
       );
       this.commentMode = false;
       this.isCommentable = false;
+      this.albumsService.currentId = this.id;
     });
   }
 

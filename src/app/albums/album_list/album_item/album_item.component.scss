@@ -1,5 +1,16 @@
 @import '../../../variables';
 
+.item_container {
+  @apply max-w-sm h-[28.2rem] rounded overflow-hidden relative flex flex-col justify-between;
+  background: $gray-100;
+  color: $dark-color;
+
+  .item_desc {
+    @apply text-base;
+    color: $gray-700;
+  }
+}
+
 .item_icon {
   @apply inline-block rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2
     active:scale-125 ease-in-out duration-75 transition-all;

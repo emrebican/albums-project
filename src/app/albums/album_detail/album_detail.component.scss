@@ -7,7 +7,7 @@
     @apply flex-1 cursor-pointer h-full;
 
     img {
-      @apply w-full h-96 md:h-full object-cover;
+      @apply w-full h-96 md:h-full object-cover object-top;
     }
   }
 
@@ -81,7 +81,7 @@
       @apply absolute bottom-2 right-10;
 
       p {
-        @apply text-sm;
+        @apply text-sm cursor-default;
         color: $gray-400;
       }
     }

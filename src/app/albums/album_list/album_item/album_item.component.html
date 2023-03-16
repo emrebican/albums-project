@@ -1,7 +1,4 @@
-<div
-  appHighlight
-  class="max-w-sm h-[28.2rem] rounded overflow-hidden bg-gray-100 group relative flex flex-col justify-between"
->
+<div appHighlight class="item_container group">
   <div
     class="op_buttons"
     *ngIf="currentUser === album.createdBy"
@@ -13,7 +10,11 @@
       <fa-icon [icon]="faDelete"></fa-icon>
     </button>
   </div>
-  <a [routerLink]="[album.id]" fragment="details">
+  <a
+    [routerLink]="[album.id]"
+    fragment="details"
+    (click)="onSendId(album.id)"
+  >
     <img
       class="w-96 h-64 object-cover"
       src="{{ album.imageURL }}"
@@ -21,7 +22,7 @@
     />
     <div class="px-6 py-4">
       <div class="font-bold text-xl mb-2">{{ album.title }}</div>
-      <p class="text-gray-700 text-base">
+      <p class="item_desc">
         {{ album.description | shorten : 9 }}
       </p>
     </div>
