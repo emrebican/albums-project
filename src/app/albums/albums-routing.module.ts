@@ -19,11 +19,13 @@ const albumsRoutes: Routes = [
     children: [
       {
         path: ':id',
+        title: 'Details',
         component: AlbumDetailComponent,
         resolve: [AlbumResolver]
       },
       {
         path: ':id/edit',
+        title: 'Edit',
         component: AlbumFormComponent,
         resolve: [AlbumResolver],
         canDeactivate: [CanDeactivateGuard]

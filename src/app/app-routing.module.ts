@@ -10,6 +10,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/albums', pathMatch: 'full' },
   {
     path: 'albums',
+    title: 'Home',
     loadChildren: () =>
       import('./albums/albums.module').then(
         (m) => m.AlbumsModule
@@ -17,17 +18,20 @@ const appRoutes: Routes = [
   },
   {
     path: 'new-album',
+    title: 'New Album',
     component: AlbumFormComponent,
     canDeactivate: [CanDeactivateGuard]
   },
   {
     path: 'auth',
+    title: 'Authentication',
     loadChildren: () =>
       import('./auth/auth.module').then((m) => m.AuthModule)
   },
   { path: '**', redirectTo: '/not-found', pathMatch: 'full' },
   {
     path: 'not-found',
+    title: '404 Page',
     component: NotFoundComponent,
     data: { message: 'Page is not found!' }
   }
