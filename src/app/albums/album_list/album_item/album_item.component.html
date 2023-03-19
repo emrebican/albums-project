@@ -37,7 +37,7 @@
         [icon]="isThumb ? faThumbsUpActive : faThumbsUp"
       ></fa-icon>
       <span class="item_badge">
-        {{ album?.reactions?.reacts?.thumb }}
+        {{ album.reactions.reacts.thumb }}
       </span>
       <ng-template
         *ngIf="
@@ -62,7 +62,7 @@
         [icon]="isLike ? faHeartActive : faHeart"
       ></fa-icon>
       <span class="item_badge">
-        {{ album?.reactions?.reacts?.like }}
+        {{ album.reactions.reacts.like }}
       </span>
       <ng-template
         *ngIf="

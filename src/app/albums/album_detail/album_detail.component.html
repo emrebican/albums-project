@@ -6,8 +6,8 @@
     (click)="onShowImg(albumDetail.imageURL)"
   >
     <img
-      src="{{ albumDetail?.imageURL }}"
-      alt="{{ albumDetail?.title }}"
+      src="{{ albumDetail.imageURL }}"
+      alt="{{ albumDetail.title }}"
     />
   </div>
   <div class="detail_content">
@@ -16,15 +16,15 @@
     </button>
 
     <div>
-      <h2>{{ albumDetail?.title }}</h2>
+      <h2>{{ albumDetail.title }}</h2>
       <p (click)="onShowDescription()">
-        {{ albumDetail?.description | shorten : 12 }}
+        {{ albumDetail.description | shorten : 12 }}
       </p>
     </div>
     <ul>
       <li
         (click)="onEditComment(i)"
-        *ngFor="let item of albumDetail?.comments; let i = index"
+        *ngFor="let item of albumDetail.comments; let i = index"
         [ngClass]="{
           'cursor-pointer': item.author === user ? true : false
         }"
