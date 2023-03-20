@@ -43,6 +43,19 @@ form {
     }
   }
 
+  .google_btn {
+    @apply flex items-center justify-center text-center w-full py-1 text-xl rounded
+    border-2 border-transparent transition-all duration-200 ease-in hover:bg-transparent hover:font-bold;
+
+    background: $blue-600;
+    color: $gray-50;
+
+    &:hover {
+      border-color: $blue-600;
+      color: $blue-600;
+    }
+  }
+
   .switch_btn {
     @apply w-full text-center mt-2;
   }

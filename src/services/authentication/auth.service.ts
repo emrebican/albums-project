@@ -11,6 +11,9 @@ import {
   throwError
 } from 'rxjs';
 
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { GoogleAuthProvider } from '@angular/fire/auth';
+
 import { environment } from 'src/environments/environment';
 import { I_AuthResponseData } from 'src/shared/models/auth.model';
 import { User } from 'src/shared/models/user.model';
@@ -18,11 +21,16 @@ import { User } from 'src/shared/models/user.model';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   user = new BehaviorSubject<any>(null);
+  googleToken = new BehaviorSubject<any>(null);
   private tokenExpirationTimer: any;
+  private token: any;
+  private imageUrl =
+    'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png';
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private fireAuth: AngularFireAuth
   ) {}
 
   onSignUp(email: string, password: string) {
@@ -41,6 +49,7 @@ export class AuthenticationService {
           this.handleAuthentication(
             responseData.email,
             responseData.localId,
+            this.imageUrl,
             responseData.idToken,
             +responseData.expiresIn
           );
@@ -64,6 +73,7 @@ export class AuthenticationService {
           this.handleAuthentication(
             responseData.email,
             responseData.localId,
+            this.imageUrl,
             responseData.idToken,
             +responseData.expiresIn
           );
@@ -88,6 +98,7 @@ export class AuthenticationService {
     const userData: {
       email: string;
       id: string;
+      image: string;
       _token: string;
       _tokenExpirationDate: string;
     } = JSON.parse(localStorage.getItem('albumUser') || '{}');
@@ -99,6 +110,7 @@ export class AuthenticationService {
     const loadedUser = new User(
       userData.email,
       userData.id,
+      userData.image,
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
@@ -121,10 +133,41 @@ export class AuthenticationService {
     }, expirationDuration);
   }
 
+  // login with Google
+  googleSignIn() {
+    this.fireAuth
+      .signInWithPopup(new GoogleAuthProvider())
+      .then((res) => {
+        res.user?.getIdTokenResult().then((resData) => {
+          this.googleToken.next(resData.token);
+        });
+
+        return res;
+      })
+      .then((res) => {
+        setTimeout(() => {
+          this.googleToken.subscribe((resData) => {
+            this.token = resData;
+          });
+
+          this.handleAuthentication(
+            res.user?.email,
+            res.user?.uid,
+            res.user?.photoURL,
+            this.token,
+            3600
+          );
+
+          this.router.navigate(['/albums']);
+        }, 200);
+      });
+  }
+
   // handle Authentication
   private handleAuthentication(
-    email: string,
-    userId: string,
+    email: any,
+    userId: any,
+    userImage: any,
     token: string,
     expiresIn: number
   ) {
@@ -132,7 +175,13 @@ export class AuthenticationService {
       new Date().getTime() + expiresIn * 1000
     );
 
-    const user = new User(email, userId, token, expirationDate);
+    const user = new User(
+      email,
+      userId,
+      userImage,
+      token,
+      expirationDate
+    );
     this.user.next(user);
 
     // LS

@@ -46,6 +46,15 @@
     {{ isLoginMode ? 'Login' : 'Sign up' }}
   </button>
   <br />
+  <br />
+  <button
+    type="button"
+    class="google_btn"
+    (click)="onGoogleAuth()"
+  >
+    <img src="../../assets/google.webp" class="w-10" alt="" />
+    Google
+  </button>
   <button
     type="button"
     class="switch_btn"

@@ -100,11 +100,11 @@
         <div class="relative ml-3" *ngIf="isAuthenticated">
           <div class="flex items-end gap-3">
             <p class="text-gray-50 text-sm font-thin">
-              {{ user | titlecase }}
+              {{ user | username : '@' }}
             </p>
             <img
               class="h-8 w-8 rounded-full cursor-pointer"
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+              src="{{ userImage }}"
               alt="userImage"
               (click)="onToggleOptions()"
             />

@@ -123,7 +123,7 @@ export class AlbumFormComponent
     let albumDescription = '';
     let albumCreated = this.user;
     let albumImageURL = '';
-    let albumComments = new FormArray([]);
+    let albumComments = new FormArray<any>([]);
     let albumReactions = new FormGroup({});
 
     if (this.editMode) {
@@ -133,7 +133,7 @@ export class AlbumFormComponent
       albumDescription = album.description;
       albumImageURL = album.imageURL;
 
-      /* if (album['comments']) {
+      if (album['comments']) {
         for (let comment of album.comments) {
           albumComments.push(
             new FormGroup({
@@ -142,7 +142,7 @@ export class AlbumFormComponent
             })
           );
         }
-      } */
+      }
     }
 
     this.albumForm = new FormGroup({

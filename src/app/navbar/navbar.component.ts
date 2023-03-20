@@ -17,6 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isStoring = false;
   isFetching = false;
   user = '';
+  userImage = '';
   private AUTH_SUB!: Subscription;
 
   constructor(
@@ -30,6 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       (userData) => {
         this.isAuthenticated = userData ? true : false;
         this.user = userData.email;
+        this.userImage = userData.image;
       }
     );
   }

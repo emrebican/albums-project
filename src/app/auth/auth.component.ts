@@ -87,6 +87,10 @@ export class AuthenticationComponent implements OnInit {
     this.authForm.reset();
   }
 
+  onGoogleAuth() {
+    this.authService.googleSignIn();
+  }
+
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }

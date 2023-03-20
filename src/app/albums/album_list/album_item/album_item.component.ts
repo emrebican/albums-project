@@ -132,26 +132,28 @@ export class AlbumItemComponent
   }
 
   private activeIcon() {
-    // isThumb
-    this.album.reactions.users.includes(
-      this.currentUser + 'thumb'
-    )
-      ? (this.isThumb = true)
-      : (this.isThumb = false);
+    if (this.album.reactions.users) {
+      // isThumb
+      this.album.reactions.users.includes(
+        this.currentUser + 'thumb'
+      )
+        ? (this.isThumb = true)
+        : (this.isThumb = false);
 
-    // isLike
-    this.album.reactions.users.includes(
-      this.currentUser + 'like'
-    )
-      ? (this.isLike = true)
-      : (this.isLike = false);
+      // isLike
+      this.album.reactions.users.includes(
+        this.currentUser + 'like'
+      )
+        ? (this.isLike = true)
+        : (this.isLike = false);
 
-    // isComment
-    this.album.comments.some(
-      (comment) => comment.author === this.currentUser
-    )
-      ? (this.isComment = true)
-      : (this.isComment = false);
+      // isComment
+      this.album.comments.some(
+        (comment) => comment.author === this.currentUser
+      )
+        ? (this.isComment = true)
+        : (this.isComment = false);
+    }
   }
 
   private onStore() {

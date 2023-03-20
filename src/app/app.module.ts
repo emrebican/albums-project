@@ -12,6 +12,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NotFoundComponent } from './not_found/not_found.component';
 import { TitleService } from 'src/services/title.service';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,8 @@ import { TitleService } from 'src/services/title.service';
     HttpClientModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     { provide: TitleStrategy, useClass: TitleService }
