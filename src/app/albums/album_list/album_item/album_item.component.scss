@@ -2,7 +2,7 @@
 
 .item_container {
   @apply max-w-sm h-[28.2rem] rounded overflow-hidden relative flex flex-col justify-between;
-  background: $gray-100;
+  background: $gray-200;
   color: $dark-color;
 
   .item_desc {
@@ -15,7 +15,8 @@
   @apply inline-block rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2
     active:scale-125 ease-in-out duration-75 transition-all;
 
-  background: $gray-100;
+  background: $gray-200;
+
   color: $gray-700;
 
   &:hover {

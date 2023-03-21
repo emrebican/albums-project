@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AlbumsService } from 'src/services/albums.service';
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthenticationService,
     private dataStorageService: DataStorageService,
-    private albumsService: AlbumsService
+    private albumsService: AlbumsService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -75,6 +77,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onFilteredAlbums() {
     this.albumsService.isFiltered = true;
+    this.router.navigate(['/albums']);
   }
 
   onCancelFiltered() {
