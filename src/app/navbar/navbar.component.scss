@@ -41,10 +41,10 @@ a {
 }
 
 .search_container {
-  @apply flex items-center gap-2 px-2 overflow-hidden
-  transition-all ease-in-out rounded;
+  @apply flex items-center gap-2 px-2 text-lg overflow-hidden
+  transition-all ease-in-out rounded sm:rounded-full;
 
   .search_input {
-    @apply h-9 sm:h-7 w-full outline-none;
+    @apply h-9 w-full sm:h-8 outline-none;
   }
 }
