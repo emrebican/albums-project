@@ -9,6 +9,7 @@ export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
   private albums: Album[] = [];
   isFiltered = false;
+  searchText = '';
   currentId!: number;
 
   constructor(

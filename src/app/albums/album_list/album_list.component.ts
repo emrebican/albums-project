@@ -39,11 +39,21 @@ export class AlbumListComponent
 
   ngDoCheck(): void {
     if (this.albumsService.isFiltered) {
+      // filter for user's albums
       this.isFiltered = true;
       this.albums = this.albumsService.getAlbums();
 
       this.albums = this.albums.filter(
         (album) => album.createdBy === this.user
+      );
+    } else if (this.albumsService.searchText) {
+      // filter for search input
+      this.albums = this.albumsService.getAlbums();
+
+      this.albums = this.albums.filter((album) =>
+        album.title.includes(
+          this.albumsService.searchText.trim()
+        )
       );
     } else {
       this.isFiltered = false;

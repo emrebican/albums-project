@@ -66,7 +66,7 @@
           />
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
+          <div class="flex items-center space-x-4">
             <a
               routerLink="/albums"
               routerLinkActive="active"
@@ -79,6 +79,7 @@
               routerLink="/new-album"
               routerLinkActive="active"
               class="nav_link"
+              (click)="onCancelFiltered()"
               >Add New</a
             >
             <a
@@ -88,6 +89,17 @@
               class="nav_link"
               >Login / Sign up</a
             >
+            <div appSearchInput class="search_container">
+              <fa-icon
+                class="cursor-pointer"
+                [icon]="searchIcon"
+              ></fa-icon>
+              <input
+                type="text"
+                class="search_input"
+                [(ngModel)]="searchText"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -181,6 +193,7 @@
         routerLink="/new-album"
         routerLinkActive="active"
         class="mobile_link"
+        (click)="onCancelFiltered()"
         >Add New</a
       >
       <a
@@ -188,8 +201,20 @@
         routerLink="/auth"
         routerLinkActive="active"
         class="mobile_link"
+        (click)="onCancelFiltered()"
         >Login / Sign up</a
       >
+      <div appSearchInput class="search_container">
+        <fa-icon
+          [icon]="searchIcon"
+          class="cursor-pointer"
+        ></fa-icon>
+        <input
+          type="text"
+          class="search_input"
+          [(ngModel)]="searchText"
+        />
+      </div>
     </div>
   </div>
 </nav>

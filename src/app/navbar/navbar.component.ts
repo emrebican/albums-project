@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -6,12 +11,16 @@ import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
 
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent
+  implements OnInit, OnDestroy, DoCheck
+{
   toggleMenu = false;
   toggleOptions = false;
   isAuthenticated = false;
@@ -19,7 +28,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isFetching = false;
   user = '';
   userImage = '';
+  searchText = '';
   private AUTH_SUB!: Subscription;
+
+  // icons
+  searchIcon = faSearch;
 
   constructor(
     private authService: AuthenticationService,
@@ -36,6 +49,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.userImage = userData.image;
       }
     );
+  }
+
+  ngDoCheck(): void {
+    this.searchText
+      ? (this.albumsService.searchText = this.searchText)
+      : (this.albumsService.searchText = '');
   }
 
   ngOnDestroy(): void {
@@ -77,10 +96,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onFilteredAlbums() {
     this.albumsService.isFiltered = true;
+    this.searchText = '';
     this.router.navigate(['/albums']);
   }
 
   onCancelFiltered() {
     this.albumsService.isFiltered = false;
+    this.searchText = '';
   }
 }

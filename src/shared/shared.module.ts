@@ -14,6 +14,7 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { GrayHighlightDirective } from './directives/grayHighlight.directive';
 import { HighlightDirective } from './directives/highlight.directive';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { searchInputDirective } from './directives/searchInput.directive';
 import { UserNamePipe } from './pipes/userName.pipe';
 import { ShortenPipe } from './pipes/shorten.pipe';
 
@@ -27,6 +28,7 @@ import { ShortenPipe } from './pipes/shorten.pipe';
     GrayHighlightDirective,
     HighlightDirective,
     AutofocusDirective,
+    searchInputDirective,
     UserNamePipe,
     ShortenPipe
   ],
@@ -49,6 +51,7 @@ import { ShortenPipe } from './pipes/shorten.pipe';
     GrayHighlightDirective,
     HighlightDirective,
     AutofocusDirective,
+    searchInputDirective,
     UserNamePipe,
     ShortenPipe
   ],
