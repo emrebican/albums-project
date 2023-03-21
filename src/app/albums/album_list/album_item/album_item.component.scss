@@ -38,7 +38,7 @@
 }
 
 .item_badge {
-  @apply inline-block whitespace-nowrap rounded-full px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none absolute top-5 right-0 ring-2 ring-gray-50;
+  @apply inline-block whitespace-nowrap rounded-full px-[0.65em] pt-[0.35em] pb-[0.25em] text-center align-baseline text-[0.75em] font-bold leading-none absolute top-5 right-0 ring-2 ring-gray-200;
 
   background: $red-400;
   color: $gray-50;
