@@ -22,7 +22,6 @@ export class NavbarComponent
   implements OnInit, OnDestroy, DoCheck
 {
   toggleMenu = false;
-  toggleOptions = false;
   isAuthenticated = false;
   isStoring = false;
   isFetching = false;
@@ -65,13 +64,8 @@ export class NavbarComponent
     this.toggleMenu = !this.toggleMenu;
   }
 
-  onToggleOptions() {
-    this.toggleOptions = !this.toggleOptions;
-  }
-
   onLogout() {
     this.authService.logout();
-    this.toggleOptions = false;
   }
 
   onStoreAlbums() {
