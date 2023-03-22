@@ -97,5 +97,6 @@ export class NavbarComponent
   onCancelFiltered() {
     this.albumsService.isFiltered = false;
     this.searchText = '';
+    this.toggleMenu = false;
   }
 }
