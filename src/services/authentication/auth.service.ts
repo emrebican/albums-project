@@ -138,28 +138,32 @@ export class AuthenticationService {
     this.fireAuth
       .signInWithPopup(new GoogleAuthProvider())
       .then((res) => {
-        res.user?.getIdTokenResult().then((resData) => {
-          this.googleToken.next(resData.token);
-        });
+        // we could reach user's info except token
+        // so get userToken with getIdTokenResult method
+        res.user
+          ?.getIdTokenResult()
+          .then((resData) => {
+            // save token into an Obs
+            this.googleToken.next(resData.token);
 
-        return res;
-      })
-      .then((res) => {
-        setTimeout(() => {
-          this.googleToken.subscribe((resData) => {
-            this.token = resData;
+            return res;
+          })
+          .then((res) => {
+            // sub Obs and get
+            this.googleToken.subscribe((resData) => {
+              this.token = resData;
+            });
+            // user the saved token
+            this.handleAuthentication(
+              res.user?.email,
+              res.user?.uid,
+              res.user?.photoURL,
+              this.token,
+              3600
+            );
+
+            this.router.navigate(['/albums']);
           });
-
-          this.handleAuthentication(
-            res.user?.email,
-            res.user?.uid,
-            res.user?.photoURL,
-            this.token,
-            3600
-          );
-
-          this.router.navigate(['/albums']);
-        }, 200);
       });
   }
 
