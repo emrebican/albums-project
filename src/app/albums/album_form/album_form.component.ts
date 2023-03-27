@@ -13,7 +13,7 @@ import {
   uploadBytes,
   getDownloadURL
 } from 'firebase/storage';
-import { storage } from 'src/environments/environment';
+import { storage } from '../../../../firebase';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';

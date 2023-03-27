@@ -1,6 +1,3 @@
-import { initializeApp } from 'firebase/app';
-import { getStorage } from 'firebase/storage';
-
 export const environment = {
   firebase: {
     projectId: 'ng-images',
@@ -21,7 +18,3 @@ export const environment = {
     'https://ng-images-default-rtdb.firebaseio.com/albums.json',
   API_KEY: 'AIzaSyC4bo-75Wo6Mt7p7MTRi1WrmOaUHFgttfM'
 };
-
-// Firebase Storage
-const app = initializeApp(environment.firebase);
-export const storage = getStorage(app);
