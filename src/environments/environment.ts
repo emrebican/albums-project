@@ -1,6 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
 
 export const environment = {
   firebase: {
@@ -11,7 +10,7 @@ export const environment = {
     apiKey: 'AIzaSyC4bo-75Wo6Mt7p7MTRi1WrmOaUHFgttfM',
     authDomain: 'ng-images.firebaseapp.com',
     messagingSenderId: '1014593091607',
-    measurementId: 'G-DL85BEZGRJ',
+    measurementId: 'G-DL85BEZGRJ'
   },
   production: false,
   SIGNUP_URL:
@@ -23,11 +22,6 @@ export const environment = {
   API_KEY: 'AIzaSyC4bo-75Wo6Mt7p7MTRi1WrmOaUHFgttfM'
 };
 
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+// Firebase Storage
+const app = initializeApp(environment.firebase);
+export const storage = getStorage(app);

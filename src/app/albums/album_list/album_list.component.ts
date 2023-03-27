@@ -5,6 +5,7 @@ import {
   DoCheck
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { getStorage, ref, listAll } from 'firebase/storage';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
@@ -35,6 +36,8 @@ export class AlbumListComponent
     );
     this.albumsService.isFiltered = false;
     this.isFiltered = false;
+
+    this.clearStorage();
   }
 
   ngDoCheck(): void {
@@ -51,9 +54,11 @@ export class AlbumListComponent
       this.albums = this.albumsService.getAlbums();
 
       this.albums = this.albums.filter((album) =>
-        album.title.includes(
-          this.albumsService.searchText.trim()
-        )
+        album.title
+          .toLowerCase()
+          .includes(
+            this.albumsService.searchText.toLowerCase().trim()
+          )
       );
     } else {
       this.isFiltered = false;
@@ -71,5 +76,45 @@ export class AlbumListComponent
   ngOnDestroy(): void {
     this.SUBSCRIPTION.unsubscribe();
     this.USER_SUB.unsubscribe();
+  }
+
+  // Delete unnecessary images from Firebase storage
+  clearStorage() {
+    const storage = getStorage();
+    const listRef = ref(storage, 'albumImages');
+    const firstTerm = '%';
+    const lastTerm = '?';
+
+    const array1: string[] = [];
+    const array2: string[] = [];
+
+    this.albumsService.albums.forEach((album) => {
+      let storeImagePath = '';
+      const firstItem = album.imageURL.indexOf(firstTerm);
+      const lastItem = album.imageURL.indexOf(lastTerm);
+
+      if (firstItem !== -1) {
+        storeImagePath =
+          'albumImages/' +
+          album.imageURL.slice(firstItem + 3, lastItem);
+      }
+      array1.push(storeImagePath);
+    });
+
+    listAll(listRef).then((res) => {
+      res.items.forEach((item) => {
+        array2.push(item.fullPath);
+      });
+    });
+
+    setTimeout(() => {
+      array2.forEach((item) => {
+        const inter = array1.includes(item);
+
+        if (!inter) {
+          this.albumsService.deleteAlbumImage(item);
+        }
+      });
+    }, 1000);
   }
 }

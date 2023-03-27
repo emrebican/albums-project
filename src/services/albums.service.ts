@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
+import { getStorage, ref, deleteObject } from 'firebase/storage';
+
 import { Album } from '../shared/models/album.model';
 
 @Injectable({ providedIn: 'root' })
 export class AlbumsService {
   albumsChanged = new Subject<Album[]>();
-  private albums: Album[] = [];
+  albums: Album[] = [];
   isFiltered = false;
   searchText = '';
   currentId!: number;
@@ -34,19 +36,24 @@ export class AlbumsService {
 
   updateAlbum(index: number, updatedAlbum: Album) {
     const albumIndex = this.getIndex(index);
-    this.albums[albumIndex] = updatedAlbum;
+    const albumImageUrl = this.albums[albumIndex].imageURL;
 
+    this.albums[albumIndex] = updatedAlbum;
     this.albumsChanged.next(this.albums.slice());
   }
 
   deleteAlbum(index: number) {
+    const albumIndex = this.getIndex(index);
+    const albumImageUrl = this.albums[albumIndex].imageURL;
+
     if (
       confirm('Are you sure that you want to delete this Album?')
     ) {
-      const albumIndex = this.getIndex(index);
-
       this.albums.splice(albumIndex, 1);
       this.albumsChanged.next(this.albums.slice());
+
+      // Delete AlbumImage from Firebase Storage
+      this.deleteAlbumImage(albumImageUrl);
 
       this.router.navigate(['/albums'], {
         relativeTo: this.route
@@ -59,6 +66,17 @@ export class AlbumsService {
     const albumIndex = this.getIndex(index);
 
     return this.albums[albumIndex];
+  }
+
+  deleteAlbumImage(url: string) {
+    const storage = getStorage();
+    const albumRef = ref(storage, url);
+
+    deleteObject(albumRef)
+      .then(() => {
+        console.log('Album Deleted');
+      })
+      .catch((error) => console.log(error));
   }
 
   private getIndex(index: number) {

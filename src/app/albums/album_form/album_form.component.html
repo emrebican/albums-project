@@ -5,16 +5,17 @@
     {{ editMode ? 'Edit' : 'Add' }} Your Album
   </h2>
   <form [formGroup]="albumForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
     <div>
       <label for="title">Title</label>
       <input
         type="text"
+        class="form_input"
         id="title"
         formControlName="title"
         Autofocus
       />
       <span
-        class="text-sm text-gray-500"
         *ngIf="
           albumForm.get('title')?.invalid &&
           albumForm.get('title')?.touched
@@ -23,6 +24,7 @@
         max.</span
       >
     </div>
+    <!-- Description -->
     <div>
       <label for="description">Description</label>
       <textarea
@@ -30,7 +32,6 @@
         formControlName="description"
       ></textarea>
       <span
-        class="text-sm text-gray-500"
         *ngIf="
           albumForm.get('description')?.invalid &&
           albumForm.get('description')?.touched
@@ -38,36 +39,49 @@
         >Type a valid "Description"</span
       >
     </div>
-    <div>
-      <label for="imageURL">Image URL</label>
+    <!-- Image -->
+    <div class="relative">
+      <label for="imageURL">Upload Image</label>
+      <span class="sr-only">Choose an image</span>
+      <p
+        class="text-slate-800 w-full text-center text-lg absolute top-0 animate-pulse"
+        *ngIf="isImgUploaded && isImgBlur"
+      >
+        Uploading...
+      </p>
       <input
-        type="text"
+        type="file"
+        class="image_input"
         id="imageURL"
         formControlName="imageURL"
-        #imagePath
+        (change)="uploadAlbumImage($event)"
       />
       <span
-        class="text-sm text-gray-500"
         *ngIf="
           albumForm.get('imageURL')?.invalid &&
           albumForm.get('imageURL')?.touched
         "
-        >Type a valid "image URL"</span
+        >Select an "Image"</span
       >
     </div>
+    <!-- Display Image -->
     <img
-      *ngIf="imagePath.value && albumForm.get('imageURL')?.valid"
-      [src]="imagePath.value"
+      *ngIf="imgPath && albumForm.get('imageURL')?.valid"
+      [src]="imgPath"
       alt=""
-      class="rounded mt-4 w-full h-full"
+      [ngClass]="{
+        form_img_blur: isImgBlur,
+        form_img: !isImgBlur
+      }"
     />
+    <!-- Submit Btn -->
     <button
       [ngClass]="{
-        add_btn: albumForm.valid,
-        disabled_btn: !albumForm.valid
+        add_btn: albumForm.valid && isImgUploaded,
+        disabled_btn: !albumForm.valid || !isImgUploaded
       }"
       type="submit"
-      [disabled]="!albumForm.valid"
+      [disabled]="!albumForm.valid || !isImgUploaded"
     >
       {{ editMode ? ('Edit' | uppercase) : ('Add' | uppercase) }}
     </button>

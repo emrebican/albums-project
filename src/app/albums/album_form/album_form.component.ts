@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,7 +6,14 @@ import {
   Validators
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from 'firebase/storage';
+import { storage } from 'src/environments/environment';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
@@ -21,13 +28,17 @@ import { Album } from '../../../shared/models/album.model';
   styleUrls: ['./album_form.component.scss']
 })
 export class AlbumFormComponent
-  implements OnInit, I_CanComponentDeactivate
+  implements OnInit, DoCheck, I_CanComponentDeactivate
 {
+  imagePath = new BehaviorSubject<any>(null);
+  imgPath = '';
+  isImgUploaded = false;
+  isImgBlur = true;
+
   id!: number;
   editMode!: boolean;
   albumForm!: FormGroup;
   changesSaved: boolean = false;
-  REGEX = /.*?(\/[\/\w\.]+)[\s\?]?.*/;
   user: string = '';
 
   constructor(
@@ -44,10 +55,14 @@ export class AlbumFormComponent
       this.editMode = params['id'] ? true : false;
       this.initForm();
     });
+
     this.authService.user.subscribe((userData) => {
       this.user = userData.email;
     });
-    console.log('ID: ', this.id);
+  }
+
+  ngDoCheck(): void {
+    if (this.imgPath) this.isImgUploaded = true;
   }
 
   canDeactivate():
@@ -61,7 +76,7 @@ export class AlbumFormComponent
       if (
         formValue.title !== selectedAlbum.title ||
         formValue.description !== selectedAlbum.description ||
-        formValue.imageURL !== selectedAlbum.imageURL
+        this.imgPath !== selectedAlbum.imageURL
       ) {
         return confirm('Do you want to discard changes?');
       } else {
@@ -86,11 +101,19 @@ export class AlbumFormComponent
       this.id
     );
 
+    // set image Path
+    let imgPath;
+    if (this.editMode && this.imgPath === '') {
+      imgPath = edittedAlbum.imageURL;
+    } else {
+      imgPath = this.imgPath;
+    }
+
     const newAlbum = new Album(
       this.albumForm.value.title,
       this.albumForm.value.description,
       this.user,
-      this.albumForm.value.imageURL,
+      imgPath,
       this.albumForm.value.comments,
       edittedAlbum?.reactions,
       this.editMode ? this.id : new Date().getTime()
@@ -126,12 +149,17 @@ export class AlbumFormComponent
     let albumComments = new FormArray<any>([]);
     let albumReactions = new FormGroup({});
 
+    // edit Form
     if (this.editMode) {
       const album = this.albumsService.getAlbum(this.id);
 
       albumTitle = album.title;
       albumDescription = album.description;
       albumImageURL = album.imageURL;
+      this.imgPath = album.imageURL;
+
+      this.isImgBlur = false;
+      this.isImgUploaded = false;
 
       if (album['comments']) {
         for (let comment of album.comments) {
@@ -145,6 +173,7 @@ export class AlbumFormComponent
       }
     }
 
+    // initialize Form
     this.albumForm = new FormGroup({
       title: new FormControl(albumTitle, [
         Validators.required,
@@ -155,11 +184,40 @@ export class AlbumFormComponent
         Validators.required
       ),
       imageURL: new FormControl(albumImageURL, [
-        Validators.required,
-        Validators.pattern(this.REGEX)
+        Validators.required
       ]),
       comments: albumComments,
       reactions: albumReactions
     });
+  }
+
+  // upload image to FB Storage
+  uploadAlbumImage(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const files = target.files as FileList;
+    const image = files[0];
+
+    if (target == null) return;
+
+    const imageRef = ref(
+      storage,
+      `albumImages/${
+        image.name + new Date().getTime().toString()
+      }`
+    );
+
+    uploadBytes(imageRef, image).then((snaphshot) => {
+      getDownloadURL(snaphshot.ref).then((url) => {
+        this.imagePath.next(url);
+
+        this.isImgBlur = true;
+        setTimeout(() => {
+          this.isImgBlur = false;
+        }, 800);
+      });
+    });
+
+    this.imagePath.subscribe((url) => (this.imgPath = url));
+    this.isImgUploaded = false;
   }
 }

@@ -89,7 +89,10 @@
       <fa-icon
         [icon]="isComment ? faCommentActive : faComment"
       ></fa-icon>
-      <span class="item_badge">
+      <span
+        class="item_badge"
+        *ngIf="album.comments.length !== 0"
+      >
         {{ album.comments.length }}
       </span>
       <ng-template
