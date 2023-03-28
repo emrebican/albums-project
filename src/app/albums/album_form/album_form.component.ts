@@ -1,4 +1,9 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -28,7 +33,11 @@ import { Album } from '../../../shared/models/album.model';
   styleUrls: ['./album_form.component.scss']
 })
 export class AlbumFormComponent
-  implements OnInit, DoCheck, I_CanComponentDeactivate
+  implements
+    OnInit,
+    DoCheck,
+    OnDestroy,
+    I_CanComponentDeactivate
 {
   imagePath = new BehaviorSubject<any>(null);
   imgPath = '';
@@ -59,10 +68,16 @@ export class AlbumFormComponent
     this.authService.user.subscribe((userData) => {
       this.user = userData.email;
     });
+
+    this.albumsService.searchInputDisplay.next(false);
   }
 
   ngDoCheck(): void {
     if (this.imgPath) this.isImgUploaded = true;
+  }
+
+  ngOnDestroy(): void {
+    this.albumsService.searchInputDisplay.next(true);
   }
 
   canDeactivate():

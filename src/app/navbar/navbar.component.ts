@@ -21,6 +21,9 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 export class NavbarComponent
   implements OnInit, OnDestroy, DoCheck
 {
+  private AUTH_SUB!: Subscription;
+  private SEARCH_SUB!: Subscription;
+
   toggleMenu = false;
   isAuthenticated = false;
   isStoring = false;
@@ -28,7 +31,7 @@ export class NavbarComponent
   user = '';
   userImage = '';
   searchText = '';
-  private AUTH_SUB!: Subscription;
+  searchDisplay: boolean = true;
 
   // icons
   searchIcon = faSearch;
@@ -48,6 +51,11 @@ export class NavbarComponent
         this.userImage = userData.image;
       }
     );
+
+    this.SEARCH_SUB =
+      this.albumsService.searchInputDisplay.subscribe(
+        (data) => (this.searchDisplay = data)
+      );
   }
 
   ngDoCheck(): void {
@@ -58,6 +66,7 @@ export class NavbarComponent
 
   ngOnDestroy(): void {
     this.AUTH_SUB.unsubscribe();
+    this.SEARCH_SUB.unsubscribe();
   }
 
   onToggleMenu() {

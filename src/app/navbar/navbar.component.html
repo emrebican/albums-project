@@ -89,7 +89,11 @@
               class="nav_link"
               >Login / Sign up</a
             >
-            <div appSearchInput class="search_container">
+            <div
+              appSearchInput
+              class="search_container"
+              *ngIf="searchDisplay"
+            >
               <fa-icon
                 class="cursor-pointer"
                 [icon]="searchIcon"

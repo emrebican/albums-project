@@ -1,4 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +14,7 @@ import { Observable } from 'rxjs';
 
 import { DynamicComponentService } from 'src/services/dynamic-component.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
+import { AlbumsService } from 'src/services/albums.service';
 
 import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
 import { I_AuthResponseData } from 'src/shared/models/auth.model';
@@ -18,7 +24,9 @@ import { I_AuthResponseData } from 'src/shared/models/auth.model';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthenticationComponent implements OnInit {
+export class AuthenticationComponent
+  implements OnInit, OnDestroy
+{
   @ViewChild(PlaceholderDirective, { static: false })
   alertHost!: PlaceholderDirective;
 
@@ -31,6 +39,7 @@ export class AuthenticationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticationService,
+    private albumsService: AlbumsService,
     private dynamicComponentService: DynamicComponentService
   ) {}
 
@@ -45,6 +54,12 @@ export class AuthenticationComponent implements OnInit {
         Validators.minLength(7)
       ])
     });
+
+    this.albumsService.searchInputDisplay.next(false);
+  }
+
+  ngOnDestroy(): void {
+    this.albumsService.searchInputDisplay.next(true);
   }
 
   onSubmit() {

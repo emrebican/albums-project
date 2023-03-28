@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { getStorage, ref, deleteObject } from 'firebase/storage';
 
@@ -13,6 +13,8 @@ export class AlbumsService {
   isFiltered = false;
   searchText = '';
   currentId!: number;
+
+  searchInputDisplay = new BehaviorSubject<boolean>(true);
 
   constructor(
     private router: Router,
