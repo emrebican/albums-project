@@ -36,8 +36,6 @@ export class AlbumListComponent
     );
     this.albumsService.isFiltered = false;
     this.isFiltered = false;
-
-    this.clearStorage();
   }
 
   ngDoCheck(): void {
@@ -74,6 +72,7 @@ export class AlbumListComponent
   }
 
   ngOnDestroy(): void {
+    this.clearStorage();
     this.SUBSCRIPTION.unsubscribe();
     this.USER_SUB.unsubscribe();
   }
@@ -113,8 +112,9 @@ export class AlbumListComponent
 
         if (!inter) {
           this.albumsService.deleteAlbumImage(item);
+          console.log('Album Deleted');
         }
       });
-    }, 1000);
+    }, 2000);
   }
 }
