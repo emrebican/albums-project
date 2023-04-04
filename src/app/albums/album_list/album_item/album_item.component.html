@@ -16,7 +16,7 @@
     (click)="onSendId(album.id)"
   >
     <img
-      class="w-96 h-64 object-cover"
+      [ngClass]="{ img_normal: !isImgBlur, img_blur: isImgBlur }"
       src="{{ album.imageURL }}"
       alt="{{ album.title }}"
     />

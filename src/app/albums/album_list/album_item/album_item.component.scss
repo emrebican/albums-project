@@ -9,6 +9,14 @@
     @apply text-base;
     color: $gray-700;
   }
+
+  .img_normal {
+    @apply w-96 h-64 object-cover blur-0 transition-all ease-in-out duration-75;
+  }
+
+  .img_blur {
+    @apply w-96 h-64 object-cover blur-sm;
+  }
 }
 
 .item_icon {

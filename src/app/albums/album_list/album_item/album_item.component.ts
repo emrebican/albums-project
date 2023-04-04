@@ -43,6 +43,7 @@ export class AlbumItemComponent
   isThumb = false;
   isLike = false;
   isComment = false;
+  isImgBlur = true;
 
   faThumbsUp = faThumbsUp;
   faHeart = faHeart;
@@ -67,6 +68,10 @@ export class AlbumItemComponent
         this.currentUser = userData.email;
       }
     );
+
+    setTimeout(() => {
+      this.isImgBlur = false;
+    }, 600);
 
     this.activeIcon();
   }
