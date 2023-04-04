@@ -5,11 +5,12 @@ import {
   DoCheck
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { getStorage, ref, listAll } from 'firebase/storage';
 
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { Album } from '../../../shared/models/album.model';
+
+import { clearStorage } from 'src/tools/clearStorage';
 
 @Component({
   selector: 'app-album-list',
@@ -72,49 +73,10 @@ export class AlbumListComponent
   }
 
   ngOnDestroy(): void {
-    this.clearStorage();
+    // Delete unnecessary images from Firebase storage
+    clearStorage(this.albumsService);
+
     this.SUBSCRIPTION.unsubscribe();
     this.USER_SUB.unsubscribe();
-  }
-
-  // Delete unnecessary images from Firebase storage
-  clearStorage() {
-    const storage = getStorage();
-    const listRef = ref(storage, 'albumImages');
-    const firstTerm = '%';
-    const lastTerm = '?';
-
-    const array1: string[] = [];
-    const array2: string[] = [];
-
-    this.albumsService.albums.forEach((album) => {
-      let storeImagePath = '';
-      const firstItem = album.imageURL.indexOf(firstTerm);
-      const lastItem = album.imageURL.indexOf(lastTerm);
-
-      if (firstItem !== -1) {
-        storeImagePath =
-          'albumImages/' +
-          album.imageURL.slice(firstItem + 3, lastItem);
-      }
-      array1.push(storeImagePath);
-    });
-
-    listAll(listRef).then((res) => {
-      res.items.forEach((item) => {
-        array2.push(item.fullPath);
-      });
-    });
-
-    setTimeout(() => {
-      array2.forEach((item) => {
-        const inter = array1.includes(item);
-
-        if (!inter) {
-          this.albumsService.deleteAlbumImage(item);
-          console.log('Album Deleted');
-        }
-      });
-    }, 2000);
   }
 }

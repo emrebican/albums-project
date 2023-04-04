@@ -13,19 +13,13 @@ import {
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from 'firebase/storage';
-import { storage } from '../../../../firebase';
-
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
 import { I_CanComponentDeactivate } from 'src/shared/models/canDeactivate.model';
 
 import { Album } from '../../../shared/models/album.model';
+import { uploadImage } from 'src/tools/uploadImage';
 
 @Component({
   selector: 'app-album-form',
@@ -208,29 +202,12 @@ export class AlbumFormComponent
 
   // upload image to FB Storage
   uploadAlbumImage(event: Event) {
-    const target = event.target as HTMLInputElement;
-    const files = target.files as FileList;
-    const image = files[0];
+    uploadImage(event, this.imagePath);
 
-    if (target == null) return;
-
-    const imageRef = ref(
-      storage,
-      `albumImages/${
-        image.name + new Date().getTime().toString()
-      }`
-    );
-
-    uploadBytes(imageRef, image).then((snaphshot) => {
-      getDownloadURL(snaphshot.ref).then((url) => {
-        this.imagePath.next(url);
-
-        this.isImgBlur = true;
-        setTimeout(() => {
-          this.isImgBlur = false;
-        }, 800);
-      });
-    });
+    this.isImgBlur = true;
+    setTimeout(() => {
+      this.isImgBlur = false;
+    }, 1800);
 
     this.imagePath.subscribe((url) => (this.imgPath = url));
     this.isImgUploaded = false;

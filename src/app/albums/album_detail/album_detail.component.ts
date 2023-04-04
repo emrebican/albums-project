@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
+import { DynamicComponentService } from 'src/services/dynamic-component.service';
 
 import { Comment } from 'src/shared/models/comment.model';
 import { Album } from '../../../shared/models/album.model';
@@ -21,7 +22,6 @@ import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { PlaceholderDirective } from 'src/shared/directives/placeholder.directive';
-import { DynamicComponentService } from 'src/services/dynamic-component.service';
 
 @Component({
   selector: 'app-album_detail',

@@ -13,6 +13,7 @@ import { AuthenticationService } from 'src/services/authentication/auth.service'
 import { DataStorageService } from 'src/services/data_storage.service';
 
 import { Album } from '../../../../shared/models/album.model';
+import { scrollTop } from 'src/tools/scrollTop';
 
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { faThumbsUp as faThumbsUpActive } from '@fortawesome/free-solid-svg-icons';
@@ -116,19 +117,8 @@ export class AlbumItemComponent
     this.currentId = this.albumsService.currentId;
 
     if (this.currentId !== id) {
-      this.onScrollTop();
+      scrollTop();
     }
-  }
-
-  private onScrollTop() {
-    let scrollToTop = window.setInterval(() => {
-      let pos = window.pageYOffset;
-      if (pos > 0) {
-        window.scrollTo(0, pos - 20);
-      } else {
-        window.clearInterval(scrollToTop);
-      }
-    }, 8);
   }
 
   private activeIcon() {
@@ -146,14 +136,13 @@ export class AlbumItemComponent
       )
         ? (this.isLike = true)
         : (this.isLike = false);
-
-      // isComment
-      this.album.comments.some(
-        (comment) => comment.author === this.currentUser
-      )
-        ? (this.isComment = true)
-        : (this.isComment = false);
     }
+    // isComment
+    this.album.comments.some(
+      (comment) => comment.author === this.currentUser
+    )
+      ? (this.isComment = true)
+      : (this.isComment = false);
   }
 
   private onStore() {
