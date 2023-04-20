@@ -1,8 +1,14 @@
 <p class="list_text">
-  {{ isFiltered ? 'Your Albums' : 'Albums' }}
+  {{
+    isFiltered
+      ? ('yourAlbums' | translate)
+      : ('albums' | translate)
+  }}
 </p>
 <div class="list_container">
-  <p *ngIf="!albums.length">There is no Album here!</p>
+  <p *ngIf="!albums.length">
+    {{ 'noAlbum' | translate }}
+  </p>
   <app-album_item
     *ngFor="let albumItem of albums; let i = index"
     [album]="albumItem"

@@ -1,9 +1,9 @@
 <!-- Dynamic Component -->
 <ng-template appPlaceholder></ng-template>
 <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
-  <h2>Join Us</h2>
+  <h2>{{ 'joinUs' | translate }}</h2>
   <div class="input_container">
-    <label for="email">Email</label>
+    <label for="email">{{ 'email' | translate }}</label>
     <input
       type="email"
       id="email"
@@ -15,11 +15,11 @@
         authForm.get('email')?.invalid &&
         authForm.get('email')?.touched
       "
-      >Type a valid "email"</span
+      >{{ 'validEmail' | translate }}</span
     >
   </div>
   <div class="input_container">
-    <label for="password">Password</label>
+    <label for="password">{{ 'password' | translate }}</label>
     <input
       type="password"
       id="password"
@@ -31,7 +31,7 @@
         authForm.get('password')?.touched
       "
     >
-      Your "password" must be at least 7 characters</span
+      {{ 'validPassword' | translate }}</span
     >
   </div>
   <button
@@ -43,7 +43,11 @@
     }"
     [disabled]="!authForm.valid"
   >
-    {{ isLoginMode ? 'Login' : 'Sign up' }}
+    {{
+      isLoginMode
+        ? ('login' | translate)
+        : ('signUp' | translate)
+    }}
   </button>
   <br />
   <br />
@@ -62,8 +66,8 @@
   >
     {{
       isLoginMode
-        ? 'Go to Sign up page!'
-        : 'You already have an account?'
+        ? ('gotoSignup' | translate)
+        : ('alreadyHaveAccount' | translate)
     }}
   </button>
 </form>

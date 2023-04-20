@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
       </div>
     </div>
     <h2 class="text-slate-800 text-center text-lg font-semibold">
-      Loading...
+      {{ 'loading' | translate }}
     </h2>`,
   styleUrls: ['./loading-spinner.component.scss']
 })

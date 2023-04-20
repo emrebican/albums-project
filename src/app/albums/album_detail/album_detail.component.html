@@ -74,8 +74,8 @@
       *ngIf="isCommentable && !commentMode"
       (click)="onCommentMode()"
     >
-      <fa-icon [icon]="faPlus"></fa-icon>
-      add comment
+      <fa-icon [icon]="faPlus"></fa-icon>&nbsp;
+      {{ 'addComment' | translate }}
     </button>
 
     <!-- Edit & Delete Buttons -->
@@ -88,14 +88,16 @@
         class="btn_edit"
         (click)="onEditAlbum()"
       >
-        Edit <fa-icon [icon]="faEdit"></fa-icon>
+        <fa-icon [icon]="faEdit"></fa-icon>
+        {{ 'edit' | translate }}
       </button>
       <button
         type="button"
         class="btn_delete"
         (click)="onDeleteAlbum()"
       >
-        Delete <fa-icon [icon]="faDelete"></fa-icon>
+        <fa-icon [icon]="faDelete"></fa-icon>
+        {{ 'delete' | translate }}
       </button>
     </div>
     <div class="created_by">

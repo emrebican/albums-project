@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { AlertComponent } from './alert/alert.component';
 import { ShowImageComponent } from './show-image/show-image.component';
@@ -36,13 +37,15 @@ import { ShortenPipe } from './pipes/shorten.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TranslateModule
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     FontAwesomeModule,
+    TranslateModule,
     AlertComponent,
     LoadingSpinnerComponent,
     ShowImageComponent,
