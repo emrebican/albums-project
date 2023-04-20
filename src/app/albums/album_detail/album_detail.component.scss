@@ -1,7 +1,8 @@
 @import '../../variables';
 
 .detail_card {
-  @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg h-[52rem] transition-all ease-in-out duration-100 md:h-[30rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
+  @apply flex flex-col sm:rounded-lg overflow-hidden drop-shadow-lg h-[52rem] transition-all ease-in duration-150 
+  md:h-[32rem] xl:h-[28rem] 2xl:h-[25rem] md:flex-row;
 
   .detail_img {
     @apply flex-1 cursor-pointer h-full;
@@ -34,15 +35,16 @@
 
     input {
       @apply px-2 w-full outline-none;
-      color: $dark-color;
+      color: $text-color;
     }
 
     ul {
-      @apply h-48 sm:h-44 md:h-52 xl:h-48  2xl:h-36 ml-6 overflow-auto;
+      @apply h-36 md:h-52 xl:h-48 2xl:h-36 ml-6 overflow-auto;
 
       li {
         @apply flex justify-between rounded mb-1 p-1 px-2;
-        background: $slate-700;
+        // background: $slate-500;
+        background: $gray-900;
 
         span {
           @apply text-sm mr-1;
@@ -59,8 +61,17 @@
       }
     }
 
+    .add_button {
+      @apply mt-5 absolute left-10 bottom-[4.5rem];
+
+      &:hover fa-icon {
+        transition: all ease-in 0.1s;
+        font-size: 1.2rem;
+      }
+    }
+
     .op_buttons {
-      @apply flex gap-4 absolute left-10 bottom-6;
+      @apply flex gap-2 absolute left-10 bottom-6;
 
       button {
         @apply p-1 px-3 rounded-sm border-2 hover:bg-transparent
@@ -81,6 +92,10 @@
       @apply absolute bottom-2 right-10;
 
       p {
+        @apply text-sm cursor-default;
+        color: $gray-200;
+      }
+      span {
         @apply text-sm cursor-default;
         color: $gray-400;
       }

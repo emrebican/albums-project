@@ -5,29 +5,44 @@ nav {
 }
 
 .burger_icon {
-  @apply inline-flex items-center justify-center rounded-md p-2;
+  @apply inline-flex items-center justify-center rounded-md p-2 transition-all ease-in;
   color: $gray-400;
   &:hover {
-    background: $gray-700;
+    background: $hover-color;
     color: $white-color;
   }
 }
 
 .nav_link {
-  @apply px-3 py-2 rounded-sm text-sm font-medium;
+  @apply px-3 py-2 rounded-sm text-sm font-medium relative z-0 overflow-hidden;
   color: $gray-300;
+
   &:hover {
-    background: $gray-700;
     color: $white-color;
+  }
+
+  &::before {
+    @apply w-full h-full absolute top-0;
+    z-index: -1;
+    left: -100%;
+    background: $hover-color;
+    content: '';
+    transition: all ease-in 0.15s;
+  }
+
+  &:hover::before {
+    left: 0;
   }
 }
 
 .mobile_link {
   @apply block px-3 py-2 rounded-sm text-base font-medium;
   color: $gray-300;
+
   &:hover {
-    background: $gray-700;
+    background: $hover-color;
     color: $white-color;
+    transition: all ease-in 0.15s;
   }
 }
 

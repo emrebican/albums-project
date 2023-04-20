@@ -42,7 +42,7 @@
       </li>
     </ul>
 
-    <!-- add comment -->
+    <!-- adding comment -->
     <div class="flex gap-2 ml-6 mt-4" *ngIf="commentMode">
       <input
         type="text"
@@ -67,8 +67,10 @@
         <fa-icon [icon]="faPlus"></fa-icon>
       </button>
     </div>
+
+    <!-- add comment button -->
     <button
-      class="mt-5"
+      class="add_button"
       *ngIf="isCommentable && !commentMode"
       (click)="onCommentMode()"
     >
@@ -76,6 +78,7 @@
       add comment
     </button>
 
+    <!-- Edit & Delete Buttons -->
     <div
       class="op_buttons"
       *ngIf="albumDetail.createdBy === user"
@@ -97,7 +100,8 @@
     </div>
     <div class="created_by">
       <p>
-        {{ albumDetail.createdBy }}
+        By
+        <span>{{ albumDetail.createdBy | username : '@' }}</span>
       </p>
     </div>
   </div>

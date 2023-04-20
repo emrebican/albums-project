@@ -3,7 +3,7 @@
 .item_container {
   @apply max-w-sm h-[28.2rem] rounded overflow-hidden relative flex flex-col justify-between;
   background: $gray-200;
-  color: $dark-color;
+  color: $text-color;
 
   .item_desc {
     @apply text-base;
@@ -24,12 +24,11 @@
     active:scale-125 ease-in-out duration-75 transition-all;
 
   background: $gray-200;
-
   color: $gray-700;
 
   &:hover {
-    background: $dark-color;
-    color: $gray-50;
+    color: $dark-color;
+    transform: scale(1.25);
   }
 
   .tooltip_list {
@@ -41,8 +40,10 @@
     background: $slate-700;
   }
 }
+
 .item_icon:hover .tooltip_list {
   display: block;
+  transform: scale(0.8);
 }
 
 .item_badge {
