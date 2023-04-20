@@ -12,8 +12,6 @@
           aria-expanded="true"
           (click)="onToggleMenu()"
         >
-          <span class="sr-only">Open main menu</span>
-
           <svg
             class="block h-6 w-6"
             fill="none"
@@ -52,14 +50,14 @@
         <div class="flex flex-shrink-0 items-center">
           <img
             class="block h-10 w-auto lg:hidden cursor-pointer"
-            src="../../assets/2048px-Angular_full_color_logo.svg.png"
+            src="../../assets/angularIcon.png"
             alt="Your Company"
             routerLink="/"
             (click)="onCancelFiltered()"
           />
           <img
             class="hidden h-10 w-auto lg:block cursor-pointer"
-            src="../../assets/2048px-Angular_full_color_logo.svg.png"
+            src="../../assets/angularIcon.png"
             alt="Your Company"
             routerLink="/"
             (click)="onCancelFiltered()"
@@ -72,7 +70,7 @@
               routerLinkActive="active"
               class="nav_link"
               (click)="onCancelFiltered()"
-              >Album</a
+              >{{ 'album' | translate }}</a
             >
             <a
               *ngIf="isAuthenticated"
@@ -80,14 +78,14 @@
               routerLinkActive="active"
               class="nav_link"
               (click)="onCancelFiltered()"
-              >Add New</a
+              >{{ 'addNew' | translate }}</a
             >
             <a
               *ngIf="!isAuthenticated"
               routerLink="/auth"
               routerLinkActive="active"
               class="nav_link"
-              >Login / Sign up</a
+              >{{ 'login-signUp' | translate }}</a
             >
             <div
               appSearchInput
@@ -101,7 +99,7 @@
               <input
                 type="text"
                 class="search_input"
-                placeholder="search"
+                placeholder="{{ 'search' | translate }}"
                 [(ngModel)]="searchText"
               />
             </div>
@@ -114,16 +112,18 @@
         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
         <!-- Profile dropdown -->
-        <div class="relative ml-3" *ngIf="isAuthenticated">
-          <div class="flex items-end gap-3">
-            <p class="text-gray-50 text-sm font-thin">
-              {{ user | username : '@' }}
-            </p>
+        <div class="relative ml-3 mr-3" *ngIf="isAuthenticated">
+          <div
+            class="flex flex-col sm:flex-row sm:flex-row-reverse items-end gap-1 sm:gap-3"
+          >
             <img
               class="h-8 w-8 rounded-full cursor-pointer"
               src="{{ userImage }}"
               alt="userImage"
             />
+            <p class="text-gray-50 text-sm font-thin">
+              {{ user | username : '@' }}
+            </p>
           </div>
           <div>
             <div
@@ -142,7 +142,9 @@
                 appGrayHighlight
                 (click)="onStoreAlbums()"
                 >{{
-                  isStoring ? 'Storing...' : 'Store Album'
+                  isStoring
+                    ? ('storing' | translate)
+                    : ('storeAlbum' | translate)
                 }}</a
               >
               <a
@@ -153,7 +155,9 @@
                 appGrayHighlight
                 (click)="onFetchAlbums()"
                 >{{
-                  isFetching ? 'Fetching...' : 'Fetch Album'
+                  isFetching
+                    ? ('fetching' | translate)
+                    : ('fetchAlbum' | translate)
                 }}</a
               >
               <a
@@ -163,7 +167,7 @@
                 id="user-menu-item-0"
                 appGrayHighlight
                 (click)="onFilteredAlbums()"
-                >My Uploads</a
+                >{{ 'myUploads' | translate }}</a
               >
               <a
                 class="block px-4 py-2 text-sm cursor-pointer"
@@ -172,9 +176,34 @@
                 id="user-menu-item-0"
                 appGrayHighlight
                 (click)="onLogout()"
-                >Log Out</a
+                >{{ 'logOut' | translate }}</a
               >
             </div>
+          </div>
+        </div>
+
+        <span class="text-white h-8 w-[2px] bg-gray-300"></span>
+
+        <!-- Translate -->
+        <div class="translation">
+          <div
+            class="translation-flag"
+            *ngFor="let lang of translate.getLangs()"
+          >
+            <img
+              [ngClass]="{
+                'grayscale-0': translate.currentLang === lang,
+                grayscale: translate.currentLang !== lang
+              }"
+              width="26px"
+              (click)="translate.use(lang)"
+              src="{{
+                lang === 'en'
+                  ? '../../assets/enFlag.svg'
+                  : '../../assets/trFlag.svg'
+              }}"
+              alt="flag"
+            />
           </div>
         </div>
       </div>
@@ -190,7 +219,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
         class="mobile_link"
         (click)="onCancelFiltered()"
-        >Album</a
+        >{{ 'album' | translate }}</a
       >
       <a
         *ngIf="isAuthenticated"
@@ -198,7 +227,7 @@
         routerLinkActive="active"
         class="mobile_link"
         (click)="onCancelFiltered()"
-        >Add New</a
+        >{{ 'addNew' | translate }}</a
       >
       <a
         *ngIf="!isAuthenticated"
@@ -206,7 +235,7 @@
         routerLinkActive="active"
         class="mobile_link"
         (click)="onCancelFiltered()"
-        >Login / Sign up</a
+        >{{ 'login-signUp' | translate }}</a
       >
       <div appSearchInput class="search_container">
         <fa-icon
@@ -216,7 +245,7 @@
         <input
           type="text"
           class="search_input"
-          placeholder="search"
+          placeholder="{{ 'search' | translate }}"
           [(ngModel)]="searchText"
         />
       </div>

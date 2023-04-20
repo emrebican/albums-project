@@ -7,6 +7,7 @@ nav {
 .burger_icon {
   @apply inline-flex items-center justify-center rounded-md p-2 transition-all ease-in;
   color: $gray-400;
+
   &:hover {
     background: $hover-color;
     color: $white-color;
@@ -61,5 +62,21 @@ a {
 
   .search_input {
     @apply h-9 w-full sm:h-8 outline-none;
+  }
+}
+
+.translation {
+  @apply flex gap-2 ml-3;
+
+  &-flag {
+    @apply cursor-pointer;
+
+    img {
+      @apply shadow-lg shadow-slate-900 transition-all ease-in duration-100;
+
+      &:hover {
+        @apply brightness-125;
+      }
+    }
   }
 }

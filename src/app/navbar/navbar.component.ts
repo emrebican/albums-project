@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { AlbumsService } from 'src/services/albums.service';
 import { AuthenticationService } from 'src/services/authentication/auth.service';
 import { DataStorageService } from 'src/services/data_storage.service';
+import { TranslationService } from 'src/services/translation.service';
 
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -36,11 +37,15 @@ export class NavbarComponent
   // icons
   searchIcon = faSearch;
 
+  // translation
+  translate: any;
+
   constructor(
     private authService: AuthenticationService,
     private dataStorageService: DataStorageService,
     private albumsService: AlbumsService,
-    private router: Router
+    private router: Router,
+    public translationService: TranslationService
   ) {}
 
   ngOnInit() {
@@ -56,6 +61,8 @@ export class NavbarComponent
       this.albumsService.searchInputDisplay.subscribe(
         (data) => (this.searchDisplay = data)
       );
+
+    this.translate = this.translationService.translate;
   }
 
   ngDoCheck(): void {
