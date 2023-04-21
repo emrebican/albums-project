@@ -1,10 +1,10 @@
 <nav>
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-20 items-center justify-between">
+      <!-- Mobile menu button START -->
       <div
         class="absolute inset-y-0 left-0 flex items-center sm:hidden"
       >
-        <!-- Mobile menu button-->
         <button
           type="button"
           class="burger_icon"
@@ -43,10 +43,13 @@
           </svg>
         </button>
       </div>
+      <!-- Mobile menu button END -->
 
+      <!-- LEFT SIDE -->
       <div
         class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
       >
+        <!-- Logo -->
         <div class="flex flex-shrink-0 items-center">
           <img
             class="block h-10 w-auto lg:hidden cursor-pointer"
@@ -63,6 +66,7 @@
             (click)="onCancelFiltered()"
           />
         </div>
+
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex items-center space-x-4">
             <a
@@ -80,13 +84,8 @@
               (click)="onCancelFiltered()"
               >{{ 'addNew' | translate }}</a
             >
-            <a
-              *ngIf="!isAuthenticated"
-              routerLink="/auth"
-              routerLinkActive="active"
-              class="nav_link"
-              >{{ 'login-signUp' | translate }}</a
-            >
+
+            <!-- Search input -->
             <div
               appSearchInput
               class="search_container"
@@ -107,24 +106,37 @@
         </div>
       </div>
 
-      <!-- Right Side -->
+      <!-- RIGHT SIDE -->
       <div
         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
       >
-        <!-- Profile dropdown -->
-        <div class="relative ml-3 mr-3" *ngIf="isAuthenticated">
+        <a
+          *ngIf="!isAuthenticated"
+          routerLink="/auth"
+          routerLinkActive="active"
+          class="nav_link hidden sm:block"
+          >{{ 'login-signUp' | translate }}</a
+        >
+
+        <!-- Profile dropdown START -->
+        <div class="relative ml-3" *ngIf="isAuthenticated">
+          <!-- user profile -->
           <div
-            class="flex flex-col sm:flex-row sm:flex-row-reverse items-end gap-1 sm:gap-3"
+            class="flex flex-col md:flex-row-reverse items-end gap-1 md:gap-3"
           >
             <img
               class="h-8 w-8 rounded-full cursor-pointer"
               src="{{ userImage }}"
               alt="userImage"
             />
-            <p class="text-gray-50 text-sm font-thin">
+            <p
+              class="text-gray-50 text-sm font-thin tracking-wider"
+            >
               {{ user | username : '@' }}
             </p>
           </div>
+
+          <!-- dropdown -->
           <div>
             <div
               class="absolute right-0 z-10 mt-2 origin-top-right bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
@@ -181,11 +193,14 @@
             </div>
           </div>
         </div>
+        <!-- Profile dropdown END -->
 
-        <span class="text-white h-8 w-[2px] bg-gray-300"></span>
+        <span
+          class="hidden sm:block text-white h-8 w-[2px] bg-gray-300 mx-3"
+        ></span>
 
         <!-- Translate -->
-        <div class="translation">
+        <div class="translation hidden sm:flex">
           <div
             class="translation-flag"
             *ngFor="let lang of translate.getLangs()"
@@ -212,7 +227,7 @@
 
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu" *ngIf="toggleMenu">
-    <div class="space-y-1 px-2 pt-2 pb-3">
+    <div class="space-y-2 px-2 pt-2 pb-3">
       <a
         routerLink="/albums"
         routerLinkActive="active"
@@ -237,6 +252,8 @@
         (click)="onCancelFiltered()"
         >{{ 'login-signUp' | translate }}</a
       >
+
+      <!-- Search input mobile -->
       <div appSearchInput class="search_container">
         <fa-icon
           [icon]="searchIcon"
@@ -248,6 +265,29 @@
           placeholder="{{ 'search' | translate }}"
           [(ngModel)]="searchText"
         />
+      </div>
+
+      <!-- Translate mobile -->
+      <div class="translation flex justify-end">
+        <div
+          class="translation-flag"
+          *ngFor="let lang of translate.getLangs()"
+        >
+          <img
+            [ngClass]="{
+              'grayscale-0': translate.currentLang === lang,
+              grayscale: translate.currentLang !== lang
+            }"
+            width="26px"
+            (click)="translate.use(lang)"
+            src="{{
+              lang === 'en'
+                ? '../../assets/enFlag.svg'
+                : '../../assets/trFlag.svg'
+            }}"
+            alt="flag"
+          />
+        </div>
       </div>
     </div>
   </div>

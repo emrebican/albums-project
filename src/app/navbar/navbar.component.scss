@@ -54,6 +54,7 @@ nav {
 
 a {
   color: $gray-700;
+  white-space: nowrap;
 }
 
 .search_container {
@@ -66,7 +67,7 @@ a {
 }
 
 .translation {
-  @apply flex gap-2 ml-3;
+  @apply gap-2;
 
   &-flag {
     @apply cursor-pointer;
