@@ -31,6 +31,12 @@
     transform: scale(1.25);
   }
 
+  &:active {
+    // color: $dark-color;
+    transform: scale(1.5);
+    transition: all ease-in 0.1s;
+  }
+
   .tooltip_list {
     @apply rounded p-1 w-fit absolute hidden flex flex-col items-center justify-center;
     bottom: 30px;
@@ -54,7 +60,7 @@
 }
 
 .op_buttons {
-  @apply absolute top-6 right-6 hidden group-hover:block;
+  @apply absolute top-6 right-6 hidden group-hover:block z-10;
 
   button {
     @apply h-7 w-7 rounded-full hover:scale-125 opacity-75 hover:opacity-100;
